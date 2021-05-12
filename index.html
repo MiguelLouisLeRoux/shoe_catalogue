@@ -7,13 +7,44 @@
     <link rel="stylesheet" href="simple-grid.css">
     <title>Sneaker Catalogue</title>
     <script src="https://kit.fontawesome.com/ab5aabd7c5.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script type="text/x-template" class="userTemplate">
+        <ul class="theShoes">
+            {{#each shoe}}
+            <li>
+                    {{this}}
+            </li>
+            {{/each}}
+        </ul>
+    </script>
 </head>
 <body>
     <nav class="nav">
-            <li class="hamburger"><a href="#"><i class="fas fa-bars"></i></a></li>
-            <li class="theTitle">Lubabalo's Sneakers</li>
-            <li class="bag"><a href="#"><i class="fas fa-shopping-bag"></i></a></li>
+            <div class="center">
+                <div class="dropdown">
+                    <li class="hamburger"><a href="#"><i class="fas fa-bars"></i></a></li>
+                    <div class="drop-content">
+                        <a href="#">Brand</a>
+                        <a href="#">Colour</a>
+                        <a href="#">Size</a>
+                    </div>
+                </div>
+                <li class="theTitle">Lubabalo's Sneakers</li>
+                <li class="bag"><a href="#"><i class="fas fa-shopping-bag"></i></a></li>
+            </div>
+            
     </nav>
+    <br>
+    <br>
+    <div class="center">
+        <div class="row">
+            <div class="col-3">
+                <div class="shoe">
+                    the
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
