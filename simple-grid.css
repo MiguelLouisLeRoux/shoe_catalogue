@@ -188,24 +188,51 @@ p {
   padding: 2%;
 }
 
-li {
+.col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.drop-content a {
+  text-decoration: none;
+  display: block;
+  padding: 0.7em 1.3em;
+}
+
+/* li {
   list-style: none;
   display: inline-block;
-}
+} */
 
 .dropdown {
   position:relative;
+  display: inline-block;
+  margin-top: 1rem;
+  width:fit-content;
 }
 
 .drop-content{
   position: absolute;
+  display: none;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 .hamburger {
   font-size: 1.2rem;
-  float: left;
+  text-align: left;
   margin-left: 2%;
-  padding-top: 1rem;
+}
+
+.dropdown:hover .drop-content {
+  display: block;
+}
+
+.drop-content a:hover {
+  background-color: #ddd;
 }
 
 .shoe {
@@ -213,16 +240,40 @@ li {
 }
 
 .bag {
+  display: inline-block;
   font-size: 1.2rem;
-  float: right;
   margin-right: 2%;
   padding-top: 1rem;
+  position: relative;
 }
 
 .theTitle {
   margin-left: auto;
   margin-right: auto;
   font-size: 1.5rem;
+  list-style: none;
+}
+
+#theBurger {
+  text-align: left;
+}
+
+.title {
+  text-align: center;
+}
+
+.theBag {
+  text-align: right;
+  position: relative;
+}
+
+/* Side Bar  */
+.side-bar {
+  position: absolute;
+  text-align: right;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 
