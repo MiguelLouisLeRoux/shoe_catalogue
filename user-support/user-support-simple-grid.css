@@ -182,153 +182,56 @@ p {
   display: none;
 }
 
-.nav {
-  background-color: whitesmoke;
-  box-sizing: border-box;
-  padding: 2%;
+body {
+  background-color: lightgrey;
+}
+
+header {
+  background-color: teal;
   text-align: center;
+  padding: 1em ;
+}
+
+.title {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  color: whitesmoke;
+}
+
+.newAdd {
+  width: fit-content;
+  margin-top: 10%;
+  border: solid 0.3rem #333447;
+  border-radius: 1em;
+  padding: 3%;
   margin-left: auto;
   margin-right: auto;
-  font-size: 1.5rem;
+  background-color:cadetblue;
 }
 
-.theTotal {
-  display: inline-block;
+.addImage {
+  border: solid 0.2rem;
+  background-color: cornsilk;
 }
 
-.theTable {
-  border-top: solid 0.1rem blue;
-  margin-top: 2em;
-}
-
-
-/* button {
-  cursor: pointer;
-  background-color: dodgerblue;
-  font-weight: bolder;
-  color: whitesmoke;
+.addShoe {
+  padding:  0.2em 1em;
+  border-radius: 0.5em;
   border: none;
-  padding: 0.5em;
-  border-radius: 0.2em;
-} */
-
-.check-out {
-  cursor: pointer;
-  background-color: dodgerblue;
+  background-color: lightsalmon;
+  border: solid lightsalmon;
   font-weight: bolder;
-  color: whitesmoke;
-  border: none;
-  padding: 0.5em;
-  border-radius: 0.2em;
+  color: #333447;
 }
 
-li {
-  list-style: none;
-}
-
-.theBag {
-  float: right;
-  padding-right: 2%;
-  position: relative;
-}
-
-.bag {
-  display: inline-block;
-  font-size: 1.2rem;
-  margin-right: 2%;
-  position: relative;
-}
-
-.close {
-  display: block;
-  width: fit-content;
-  margin-bottom: 1em;
-}
-
-.close:hover {
+.addShoe:hover {
   cursor: pointer;
-}
-
-.side-bar {
-  display: none;
-  position: absolute;
-  left: -15em;
-  width: 15em;
-  background-color: #f1f1f1;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  padding: 1em;
-  border-radius: 0.5rem;
-}
-
-table {
-  float: right;
-}
-
-td {
-  padding-top: 0.3em;
-}
-
-.check-out {
-  margin-left: 5em;
-}
-
-label {
-  display: inline-block;
-  padding: 0.5em 0;
-}
-
-.filter {
-  float: left;
-  margin-left: 2%;
-  text-align: left;
-  padding-right: 2%;
-  position: relative;
-}
-
-.theFilter {
-  display: none;
-  position: absolute;
-  width: 8em;
-  background-color: #f1f1f1;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  padding: 1em;
-  border-radius: 0.5rem;
-}
-
-.filter:hover .theFilter {
-  display: block;
-}
-
-.show {
-  display: block;
-}
-
-.shoe {
-  background-color: lightskyblue;
-  width: fit-content;
-  display: inline-block;
-  padding: 5%;
-  border-radius: 1rem;
-  margin: 1%;
-}
-
-.addTo {
-  border-radius: 0.3rem;
-  cursor: pointer;
-  background-color: dodgerblue;
-  font-weight: bolder;
-  color: whitesmoke;
-  border: none;
-  padding: 0.5em;
-  border-radius: 0.2em;
-}
-
-.addTo:hover {
   background-color: seagreen;
+  border: solid seagreen;
+  color: aliceblue;
   transition: 300ms;
 }
+
 
 
 @media only screen and (min-width: 33.75em) {  /* 540px */
@@ -395,13 +298,5 @@ label {
   .container {
     width: 75%;
     max-width: 60rem;
-  }
-
-  .bag {
-    font-size: 1.5rem;
-  }
-
-  .hamburger {
-    font-size: 1.5rem;
   }
 }
