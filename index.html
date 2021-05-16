@@ -11,58 +11,29 @@
     <script type="text/x-template" class="userTemplate">
         {{#each shoes}}
             <div class="shoe">
+                <img src={{image}}>
+                <br>
+                <br>
                 <li><strong>Brand:</strong> {{brand}}</li>
                 <li><strong>Price:</strong> {{price}}</li>
                 <li><strong>Size:</strong> {{size}}</li>
                 <li><strong>Stock:</strong> {{stock}}</li>
                 <br>
                 <button class="addTo">Add to cart</button>
+                <br>
+                <br>
+                <br>
             </div>
         {{/each}}
     </script>
 </head>
 <body>
     <nav class="nav"> 
-        <strong class="title">Lubabalo's Sneakers</strong>
+        <img src="images/title.png"  class="theTitle">
     </nav>
     <br>
     <br>
     <div class="row">
-        <div class="filter">
-            <a href="#" class="hamburger"><i class="fas fa-bars"></i></a>
-            <div class="theFilter">
-                <label>
-                    Brand:
-                    <select>
-                        <option>Adidas</option>
-                        <option>Converse</option>
-                        <option>Asics</option>
-                    </select>
-                </label>
-                <br>
-                <label>
-                    Colour:
-                    <select>
-                        <option>White</option>
-                        <option>Black</option>
-                        <option>Navy</option>
-                    </select>
-                </label>
-                <br>
-                <label>
-                    Size:
-                    <select>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
-                </label>
-                
-            </div>
-        </div>
         <div class="theBag">
             <a href="#" class="bag"><i class="fas fa-shopping-bag"></i></a>
             <div class="side-bar">
@@ -85,6 +56,53 @@
             </div>
         </div>
     </div>
+
+    <div class="filter">
+        <div class="theFilter">
+            <strong class="filter-title">Filter Search By:</strong>
+            <br>
+            
+            <label>
+                Brand:
+                <select>
+                    <option>Select</option>
+                    <option>Adidas</option>
+                    <option>Converse</option>
+                    <option>Asics</option>
+                    <option>New Balance</option>
+                    <option>Nike</option>
+                </select>
+            </label>
+            <br>
+            <label>
+                Colour:
+                <select>
+                    <option>Select</option>
+                    <option>White</option>
+                    <option>Grey</option>
+                    <option>Black</option>
+                    <option>Blue</option>
+                    <option>Green</option>
+                    <option>Red</option>
+                </select>
+            </label>
+            <br>
+            <label>
+                Size:
+                <select>
+                    <option>Select</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>
+            </label>
+            
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="center">
@@ -94,7 +112,8 @@
             </div>
         </div>
     </div>
-    
+    <br>
+    <br>
     <script src="tests/factory.js"></script>
     <script src="dom.js"></script>
 </body>
