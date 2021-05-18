@@ -27,7 +27,8 @@ function shoeFactory() {
         for (var i = 0; i <shoeList.length; i++) {
 
             var itt = shoeList[i];
-
+            
+            //Filtering
             if (itt.brand === brands && itt.colour === colour && itt.size === size) {
                 var filt = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.colour === colour && itt.size === size;
@@ -35,47 +36,73 @@ function shoeFactory() {
 
                 return filt;
 
-            } else if (itt.colour === colour && itt.size === size) {
+            } else if (itt.colour === colour && itt.size === size && brands === "All") {
                 var filt2 = shoeList.filter(function(itt){
                     return itt.colour === colour && itt.size === size;
                 })
 
                 return filt2;
 
-            } else if (itt.brand === brands && itt.size === size) {
+            } else if (itt.brand === brands && itt.size === size && colour === "All") {
                 var filt3 = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.size === size;
                 })
 
                 return filt3;
 
-            } else if (itt.brand === brands && itt.colour === colour) {
+            } else if (itt.brand === brands && itt.colour === colour && size === "All") {
                 var filt4 = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.colour === colour;
                 })
 
                 return filt4;
+            
+
+            } else if (itt.brand === brands && colour === "All" && size === "All") {
+                var filt5 = shoeList.filter(function(itt){
+                    return itt.brand === brands;
+                })
+
+                return filt5;
+            
+            } else if (itt.colour === colour && brands === "All" && size === "All") {
+                var filt6 = shoeList.filter(function(itt){
+                    return itt.colour === colour;
+                })
+                console.log(filt6);
+                return filt6;
+            
+            } else if (itt.size === size && brands === "All" && colour === "All") {
+                var filt7 = shoeList.filter(function(itt){
+                    return itt.size === size;
+                })
+
+                return filt7;
 
             } else if (brands === "All" && colour === "All" && size === "All") {
 
                 return shoeList;
-            }
 
+            }
+            
         }
-    
     }
 
+    function addCart(object) {
+        object.stock--;
+    }
 
 
     function values() {
         return {
             theList : shoeList,
-    
+            theError : error,
         }
     }
 
     return { values,
              filtering,
+             addCart,
 
     }
 }
