@@ -8,7 +8,6 @@ var sizeFilter = document.querySelector(".size");
 var filterButton = document.querySelector(".filtButton");
 
 
-
 //Factory function reference
 var theShoeFactory = shoeFactory();
 
@@ -43,14 +42,27 @@ document.addEventListener('DOMContentLoaded', function(){
         if (shoeSect.childElementCount === 0) {
             shoeSect.innerHTML = theShoeFactory.values().theError; 
         }
+        
     });
+
     
     // Adding to cart
     var addBtn = document.querySelectorAll(".addTo");
 
     for (const itt of addBtn) {
         itt.addEventListener("click", function() {
-            console.log(itt.parentNode);
+
+            // console.log();
+
+            shoeSect.innerHTML = "";
+
+            var userData = { 
+                shoes : theShoeFactory.addCart(itt.value)
+            };
+    
+            userDataHTML = userTemplate(userData);
+            shoeSect.innerHTML = userDataHTML;
+
         })
     }
 })
