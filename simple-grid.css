@@ -237,8 +237,30 @@ li {
   position: relative;
 }
 
-.bag-content {
-  height: 18em;
+.bag-content img{
+  width: 5em;
+  height: 5em;
+}
+
+.bag-content div {
+  display: inline-block;
+  margin: 0.5em;
+  
+}
+
+.bag-content button {
+  cursor: pointer;
+  background-color: coral;
+  font-weight: bold;
+  color: whitesmoke;
+  border: none;
+  padding: 0.3em;
+  border-radius: 0.2em;
+  margin-left: 1em;
+}
+
+.bag-content button:hover {
+  background-color: crimson;
 }
 
 .close {
@@ -254,8 +276,8 @@ li {
 .side-bar {
   display: none;
   position: absolute;
-  left: -15em;
-  width: 15em;
+  left: -24em;
+  width: 23em;
   background-color: #f1f1f1;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -272,7 +294,7 @@ td {
 }
 
 .check-out {
-  margin-left: 5em;
+  margin-left: 14em;
 }
 
 label {

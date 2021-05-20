@@ -1,5 +1,6 @@
 var bag = document.querySelector(".bag");
 var bagCont = document.querySelector(".side-bar");
+var cart = document.querySelector(".bag-content");
 var closeBag = document.querySelector(".close");
 var shoeSect = document.querySelector(".the-shoe");
 var brandFilter = document.querySelector(".brand");
@@ -8,64 +9,72 @@ var sizeFilter = document.querySelector(".size");
 var filterButton = document.querySelector(".filtButton");
 
 
+
 //Factory function reference
 var theShoeFactory = shoeFactory();
-
-document.addEventListener('DOMContentLoaded', function(){
     
-    //Template
-    var templateSource = document.querySelector(".userTemplate").innerHTML;
-    var userTemplate = Handlebars.compile(templateSource);
+//Template for displaying sneaker catalogue
+var templateSource = document.querySelector(".userTemplate").innerHTML;
+var userTemplate = Handlebars.compile(templateSource);
+var userData = { 
+    shoes : theShoeFactory.values().theList
+};
+
+userDataHTML = userTemplate(userData);
+shoeSect.innerHTML = userDataHTML;
+    
+//Filter 
+filterButton.addEventListener("click", function(){
+    var theBrand = brandFilter.value;
+    var theColour = colourFilter.value;
+    var theSize = sizeFilter.value;
+
+    shoeSect.innerHTML = "";
+
+    var filteredData = { 
+        shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
+    };
+
+    filteredDataHTML = userTemplate(filteredData);
+    shoeSect.innerHTML = filteredDataHTML;
+
+    //Error message condition
+    if (shoeSect.childElementCount === 0) {
+        shoeSect.innerHTML = theShoeFactory.values().theError; 
+    }
+    
+});  
+
+//Template for displaying sneakers in cart
+var cartTemplateSource = document.querySelector(".cartTemplate").innerHTML;
+var cartTemplate = Handlebars.compile(cartTemplateSource);
+
+function addBtn(itt) {
+   theShoeFactory.addCart(itt);
+   
+
+    shoeSect.innerHTML = "";
+
+    //display template
     var userData = { 
-        shoes : theShoeFactory.values().theList
+        shoes : theShoeFactory.values().theFilt
     };
 
     userDataHTML = userTemplate(userData);
     shoeSect.innerHTML = userDataHTML;
-    
-    //Filter 
-    filterButton.addEventListener("click", function(){
-        var theBrand = brandFilter.value;
-        var theColour = colourFilter.value;
-        var theSize = sizeFilter.value;
-        
-        shoeSect.innerHTML = "";
 
-        var userData = { 
-            shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
-        };
-    
-        userDataHTML = userTemplate(userData);
-        shoeSect.innerHTML = userDataHTML;
+    //cart template
+    var cartData = { 
+        shoes : theShoeFactory.values().theCart
+    };
 
-        //Error message condition
-        if (shoeSect.childElementCount === 0) {
-            shoeSect.innerHTML = theShoeFactory.values().theError; 
-        }
-        
-    });
+    cartDataHTML = cartTemplate(cartData);
+    cart.innerHTML = cartDataHTML;
+}
 
-    
-    // Adding to cart
-    var addBtn = document.querySelectorAll(".addTo");
 
-    for (const itt of addBtn) {
-        itt.addEventListener("click", function() {
+   
 
-            // console.log();
-
-            shoeSect.innerHTML = "";
-
-            var userData = { 
-                shoes : theShoeFactory.addCart(itt.value)
-            };
-    
-            userDataHTML = userTemplate(userData);
-            shoeSect.innerHTML = userDataHTML;
-
-        })
-    }
-})
 
 //Show Shopping Cart 
 bag.addEventListener("click", function() {

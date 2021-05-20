@@ -19,11 +19,33 @@
                 <li><strong>Size:</strong> {{size}}</li>
                 <li><strong>Stock:</strong> {{stock}}</li>
                 <br>
-                <button class="addTo" value={{tag}}>Add to cart</button>
+                <button class="addTo" value={{tag}} onclick="addBtn(this.value)" >Add to cart</button>
                 <br>
                 <br>
                 <br>
             </div>
+        {{/each}}
+    </script>
+    <script type="text/x-template" class="cartTemplate">
+        {{#each shoes}}
+            <div class= "row">
+                <div class="theGrid">
+                    <div>
+                        <img src={{image}}>
+                    </div>
+                    <div>
+                        <li><strong>Brand:</strong> {{brand}}</li>
+                        <li><strong>Size:</strong> {{size}}</li>
+                        <li><strong>Qty:</strong> {{quantity}}</li>
+                        <li><strong>Price:</strong> {{price}}</li>
+                    </div>
+                    <div>
+                        <button class="removeCart" value={{tag}} onclick="removeBtn(this.value)" >Remove</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
         {{/each}}
     </script>
 </head>
