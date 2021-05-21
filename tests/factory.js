@@ -26,10 +26,10 @@ function shoeFactory() {
 
     //Sneakers added to cart
     var cartList = [];
+    var list = [];
     
     var error = "Sorry, No match found.";
     var noStock = "Out of stock";
-    
 
     //Filtering
     function filtering(brands, colour, size) {
@@ -100,7 +100,7 @@ function shoeFactory() {
 
     //Adding to cart
     function addCart(tag) {
-       
+
         //Decrement when adding to cart
         for (var j = 0; j < display.length; j++) {
             
@@ -111,40 +111,32 @@ function shoeFactory() {
                 if (itt2.stock > 1) {
 
                     itt2.stock--;
+                    cartList.push(itt2);
 
-                    if (cartList.length === 0) {
+                    for (var k = 0; k < cartList.length; k++) {
 
-                        cartList.push(itt2);
+                        var itt = cartList[k];
 
-                    } else {
-                        
-                        for (var k = 0; k < cartList.length; k++) {
-            
-                            var cartItt = cartList[k];
-                            
-                            if (tag === cartItt.tag) {
-                                
-                                cartItt.quantity++;
-                
-                            } else {
-                
-                                cartList.push(itt2);
-                            }
+                        if (tag === itt.tag) {
+                            itt.quantity ++;
                         }
                     }
-                    
+            
                 } else if (itt2.stock === 1) {
                 
                     itt2.stock = noStock;
 
                 }
+
             }
             
         }
-
     }
-    
 
+    function set() {
+        let uniqueChars = [...new Set(cartList)];
+        return uniqueChars;
+    }
 
     function values() {
         return {
@@ -153,12 +145,14 @@ function shoeFactory() {
             theError : error,
             outOfStock : noStock,
             theCart : cartList,
+        
         }
     }
 
     return { values,
              filtering,
              addCart,
-
+             set,
+           
     }
 }

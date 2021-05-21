@@ -9,7 +9,6 @@ var sizeFilter = document.querySelector(".size");
 var filterButton = document.querySelector(".filtButton");
 
 
-
 //Factory function reference
 var theShoeFactory = shoeFactory();
     
@@ -51,7 +50,8 @@ var cartTemplate = Handlebars.compile(cartTemplateSource);
 
 function addBtn(itt) {
    theShoeFactory.addCart(itt);
-   
+   theShoeFactory.set();
+
 
     shoeSect.innerHTML = "";
 
@@ -65,15 +65,13 @@ function addBtn(itt) {
 
     //cart template
     var cartData = { 
-        shoes : theShoeFactory.values().theCart
+        // shoes : theShoeFactory.values().theCart
+        shoes : theShoeFactory.set()
     };
 
     cartDataHTML = cartTemplate(cartData);
     cart.innerHTML = cartDataHTML;
 }
-
-
-   
 
 
 //Show Shopping Cart 
