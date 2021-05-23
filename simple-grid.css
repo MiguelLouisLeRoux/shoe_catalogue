@@ -237,6 +237,14 @@ li {
   position: relative;
 }
 
+.fa-shopping-bag:hover {
+  color: seagreen;
+}
+
+.fa-times:hover {
+  color: crimson;
+}
+
 .bag-content img{
   width: 5em;
   height: 5em;

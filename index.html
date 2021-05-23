@@ -15,11 +15,11 @@
                 <br>
                 <br>
                 <li><strong>Brand:</strong> {{brand}}</li>
-                <li><strong>Price:</strong> {{price}}</li>
                 <li><strong>Size:</strong> {{size}}</li>
                 <li><strong>Stock:</strong> {{stock}}</li>
+                <li><strong>Price:</strong>  R{{price}}</li>
                 <br>
-                <button class="addTo" value={{tag}} onclick="addBtn(this.value)" >Add to cart</button>
+                <button class="addTo" value={{tag}} onclick="addBtn(value)" >Add to cart</button>
                 <br>
                 <br>
                 <br>
@@ -37,7 +37,7 @@
                         <li><strong>Brand:</strong> {{brand}}</li>
                         <li><strong>Size:</strong> {{size}}</li>
                         <li><strong>Qty:</strong> {{quantity}}</li>
-                        <li><strong>Price:</strong> {{price}}</li>
+                        <li><strong>Price: R</strong> {{price}}</li>
                     </div>
                     <div>
                         <button class="removeCart" value={{tag}} onclick="removeBtn(this.value)" >Remove</button>
@@ -68,7 +68,7 @@
                         <tr><td class="line"></td></tr>
                         <tr>
                             <td>Total:</td>
-                            <td><span class="total-cost">R<span>0.00</span></span></td>
+                            <td><span class="total-cost">R<span class="theTot">0.00</span></span></td>
                             <td><button class="check-out">Check Out</button></td>        
                         </tr>
                     </table>
