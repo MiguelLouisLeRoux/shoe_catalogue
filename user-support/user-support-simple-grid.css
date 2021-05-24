@@ -198,22 +198,6 @@ header {
   color: whitesmoke;
 }
 
-.newAdd {
-  width: fit-content;
-  margin-top: 10%;
-  border: solid 0.3rem #333447;
-  border-radius: 1em;
-  padding: 3%;
-  margin-left: auto;
-  margin-right: auto;
-  background-color:cadetblue;
-}
-
-.addImage {
-  border: solid 0.2rem;
-  background-color: cornsilk;
-}
-
 .addShoe {
   padding:  0.2em 1em;
   border-radius: 0.5em;

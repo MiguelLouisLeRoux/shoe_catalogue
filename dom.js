@@ -81,7 +81,6 @@ function addBtn(itt) {
 
 function removeBtn(tag) {
     //cart template
-
     cart.innerHTML = "";
 
     var cartData = { 
@@ -92,12 +91,30 @@ function removeBtn(tag) {
     cartDataHTML = cartTemplate(cartData);
     cart.innerHTML = cartDataHTML;
 
+
+    //display template
+    var userData = { 
+        shoes : theShoeFactory.values().theDisplay
+    };
+
+    userDataHTML = userTemplate(userData);
+    shoeSect.innerHTML = userDataHTML;
+
     grandTot.innerHTML = theShoeFactory.values().total;
     
 }
 
 checkOut.addEventListener('click', function(){
     cart.innerHTML = "";
+    theShoeFactory.emptyCart();
+
+    var userData = { 
+        shoes : theShoeFactory.values().theDisplay
+    };
+
+    userDataHTML = userTemplate(userData);
+    shoeSect.innerHTML = userDataHTML;
+    
     grandTot.innerHTML = theShoeFactory.resetTot();
 })
 

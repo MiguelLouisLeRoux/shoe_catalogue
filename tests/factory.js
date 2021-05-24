@@ -21,6 +21,7 @@ function shoeFactory() {
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2133974/original.jpg", brand: "New Balance", price: 1299.99, size: "9", stock: 15, colour: "Blue", tag: "NB2", quantity: 1},
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2171200/original.jpg", brand: "New Balance", price: 1299.99, size: "8", stock: 13, colour: "Red", tag: "NB3", quantity: 1}]
 
+    //Filtered list
     var display = shoeList;
     
     //Sneakers added to cart
@@ -109,7 +110,7 @@ function shoeFactory() {
             
             if (tag === itt2.tag) {
                 
-                if (itt2.stock >= 1) {
+                if (itt2.stock > 1) {
 
                     itt2.stock--;
                     
@@ -123,11 +124,25 @@ function shoeFactory() {
                         ob[itt2.tag]++;
                     }
                     
-                } else if (itt2.stock < 1 || itt2.stock === 1) {
-                
-                    itt2.stock = noStock;
+                } else if (itt2.stock === 1) {
+                    
+                    itt2.stock--;
+                    
+                    cartList.push(itt2);
 
+                    grandTot += itt2.price;
+
+                    if (!ob.hasOwnProperty(itt2.tag)) {
+                        ob[itt2.tag] = 1;
+                    } else if (ob.hasOwnProperty(itt2.tag)){
+                        ob[itt2.tag]++;
+                    }
+
+                    itt2.stock = noStock;
+                    
                 }
+                    
+                
 
             }
             
@@ -135,7 +150,7 @@ function shoeFactory() {
       
     }
 
-
+    //Adding and updating cart data
     function set() {
         
         let uniqueChars = [...new Set(cartList)];
@@ -154,24 +169,85 @@ function shoeFactory() {
         
     }
 
+    //Removing from cart
     function remove(tag) {
-        // console.log(cart);
         
-
-
         for (var i = 0; i < cart.length; i++) {
 
             var itt = cart[i];
 
-            if (grandTot > 0.00) {
-                grandTot -= itt.price;
+            if (grandTot > 0) {
+            
+                if (tag === itt.tag) {
+                    grandTot -= itt.price;
+                    console.log(cart);
+                }     
+            } else if (grandTot <= 0){
+                grandTot = 0.00;
             }
+
+            
 
             if (itt.tag === tag) {
                 if (itt.quantity > 1) {
                     itt.quantity -= 1;
+
+                    for (const theProp in ob) {
+                        if (itt.tag === theProp) {
+                            ob[theProp]--;
+                        
+                        }
+                        
+                    }
+
+                    for (var k = 0; k < shoeList.length; k++) {
+                        var theItt = shoeList[k];
+
+                        if (theItt.tag === tag) {
+                            if (theItt.stock === noStock) {
+                                theItt.stock = 1;
+                            } else {
+                                theItt.stock++;
+                            }
+                            
+                        }
+                    }
+
                     return cart;
+
                 } else if (itt.quantity === 1) {
+
+                    for (const prop in ob) {
+                        if (prop === itt.tag) {
+                            delete ob[prop];
+                        }
+                    }
+
+                    let uniqueChars = [...new Set(cartList)];
+                    cartList = uniqueChars;
+
+                    for (var j = 0; j < cartList.length; j++) {
+                        var itt2 = cartList[j];
+
+                        if (itt.tag === itt2.tag) {
+                            let index1 = cartList.indexOf(itt2);
+                        
+                            if (index1 > -1) {
+                                cartList.splice(index1, 1);
+                            }
+                        }
+                    
+                    }
+
+                    for (var l = 0; l < shoeList.length; l++) {
+                        var theItt1 = shoeList[l];
+
+                        if (theItt1.tag === tag) {
+
+                            theItt1.stock++;
+                        
+                        }
+                    }
 
                     let index = cart.indexOf(itt);
                     if (index > -1) {
@@ -185,9 +261,34 @@ function shoeFactory() {
         }
     }
 
+    //Reseting total after checkout
     function resetTot() {
         grandTot = 0.00;
         return grandTot.toFixed(2);
+    }
+
+    //Emptying cart after checkout
+    function emptyCart() {
+
+        for (var i = 0; i < display.length; i++) {
+            var itt = shoeList[i];
+
+            if (itt.stock === noStock) {
+                let index = shoeList.indexOf(itt);
+                if (index > -1) {
+                    shoeList.splice(index, 1);
+                }
+            }
+        }
+
+        cartList = [];
+        cart = [];
+        ob = {};
+        return cart;
+    }
+
+    function userSupport() {
+
     }
 
     function values() {
@@ -207,7 +308,8 @@ function shoeFactory() {
              set,
              remove,
              resetTot,
-            
+             emptyCart,
+             userSupport,
            
     }
 }

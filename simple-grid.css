@@ -303,6 +303,18 @@ td {
 
 .check-out {
   margin-left: 14em;
+  /* margin-left: auto; */
+}
+
+/* .t {
+  display: block;
+  float: left;
+  margin-right: auto;
+} */
+
+.check-out:hover {
+  background-color: seagreen;
+  transition: 300ms;
 }
 
 label {
