@@ -5,7 +5,7 @@ function shoeFactory() {
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2054099/original.jpg", brand: "Adidas", price: 2599.99, size: "7", stock: 7, colour: "Blue", tag: "A3", quantity: 1}, 
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2155221/original.jpg", brand: "Adidas", price: 1499.99, size: "5", stock: 8, colour: "Blue", tag: "A4", quantity: 1}, 
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2066888/original.jpg", brand: "Adidas", price: 1499.99, size: "10", stock: 12, colour: "Red", tag: "A5", quantity: 1}, 
-    {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/1932843/original.jpg", brand: "Adidas", price: 1499.99, size: "9", stock: 5, colour: "Grey", tag: "A6", quantity: 1},
+    {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/1932843/original.jpg", brand: "Adidas", price: 1499.99, size: "9", stock: 8, colour: "Grey", tag: "A6", quantity: 1},
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/1931440/original.jpg", brand: "Nike", price: 1599.99, size: "9", stock: 6, colour: "White", tag: "N1", quantity: 1},
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2188959/original.jpg", brand: "Nike", price: 1999.99, size: "8", stock: 6, colour: "White", tag: "N2", quantity: 1},
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/1885442/original.jpg", brand: "Nike", price: 1999.99, size: "7", stock: 6, colour: "Grey", tag: "N3", quantity: 1},
@@ -29,11 +29,17 @@ function shoeFactory() {
     var cart = [];
     var ob = {};
 
+    //Grand Total
     var grandTot = 0.00;
     
     //User messages
     var error = "Sorry, No match found.";
     var noStock = "Out of stock";
+
+    //User support 
+    var newShoesList = [];
+    var newObj = {};
+    
 
     //Filtering
     function filtering(brands, colour, size) {
@@ -287,9 +293,41 @@ function shoeFactory() {
         return cart;
     }
 
-    function userSupport() {
-
+    function userSupport(link, brand, colour, size, stock, tag, price) {
+        this.image = link;
+        this.brand = brand;
+        this.colour = colour;
+        this.size = size;
+        this.stock = stock
+        this.tag = tag;
+        this.price = price;
     }
+
+    function newShoe(link, brand, colour, size, stock, tag, price) {
+
+        var theNewShoe = new userSupport(link, brand, colour, size, stock, tag, price);
+        
+
+        
+        newShoesList.push(theNewShoe);
+    }
+
+    function addingNewShoe() {
+        for (var i = 0; i < newShoesList.length; i++) {
+            var itt = newShoesList[i];
+            console.log(itt);
+            shoeList.push(itt);
+
+            newShoesList.shift();
+        }
+
+        
+    }
+
+    function settingLocal(list) {
+       display = list;
+    }
+
 
     function values() {
         return {
@@ -299,6 +337,8 @@ function shoeFactory() {
             outOfStock : noStock,
             theCart : cartList,
             total : grandTot.toFixed(2),
+            newShoe : newShoesList,
+            
         }
     }
 
@@ -309,7 +349,9 @@ function shoeFactory() {
              remove,
              resetTot,
              emptyCart,
-             userSupport,
+             newShoe,
+             addingNewShoe,
+             settingLocal,
            
     }
 }

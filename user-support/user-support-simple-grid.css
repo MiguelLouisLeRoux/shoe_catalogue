@@ -202,13 +202,65 @@ header {
   padding:  0.2em 1em;
   border-radius: 0.5em;
   border: none;
+  background-color: dodgerblue;
+  border: solid dodgerblue;
+  font-weight: bolder;
+  color: whitesmoke;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  width: 12em;
+  height: 15em;
+}
+
+.catalogue {
+  padding:  0.2em 1em;
+  border-radius: 0.5em;
+  border: none;
+  background-color: dodgerblue;
+  border: solid dodgerblue;
+  font-weight: bolder;
+  color: whitesmoke;
+}
+
+.catalogue:hover {
+  cursor: pointer;
+  background-color: seagreen;
+  border: solid seagreen;
+  color: aliceblue;
+  transition: 300ms;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.displayShoe {
+  padding:  0.2em 1em;
+  border-radius: 0.5em;
+  border: none;
   background-color: lightsalmon;
   border: solid lightsalmon;
   font-weight: bolder;
   color: #333447;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .addShoe:hover {
+  cursor: pointer;
+  background-color: seagreen;
+  border: solid seagreen;
+  color: aliceblue;
+  transition: 300ms;
+}
+
+.displayShoe:hover {
   cursor: pointer;
   background-color: seagreen;
   border: solid seagreen;
@@ -238,7 +290,7 @@ header {
   }
 
   .col-4 {
-    width: 29.33%;
+    width: 50%;
   }
 
   .col-5 {
@@ -280,7 +332,7 @@ header {
 
 @media only screen and (min-width: 60em) { /* 960px */
   .container {
-    width: 75%;
-    max-width: 60rem;
+    width: 80%;
+    max-width: 85rem;
   }
 }

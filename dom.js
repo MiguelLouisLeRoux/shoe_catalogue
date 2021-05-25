@@ -1,3 +1,4 @@
+//Catalogue Dom
 var bag = document.querySelector(".bag");
 var bagCont = document.querySelector(".side-bar");
 var cart = document.querySelector(".bag-content");
@@ -10,9 +11,11 @@ var filterButton = document.querySelector(".filtButton");
 var grandTot = document.querySelector(".theTot");
 var checkOut = document.querySelector(".check-out");
 
-
 //Factory function reference
 var theShoeFactory = shoeFactory();
+
+//Local Storage
+var localSHoeList
     
 //Template for displaying sneaker catalogue
 var templateSource = document.querySelector(".userTemplate").innerHTML;
@@ -23,6 +26,28 @@ var userData = {
 
 userDataHTML = userTemplate(userData);
 shoeSect.innerHTML = userDataHTML;
+
+//Local Storage
+
+if (localStorage["theArr"]) {
+
+    // localSHoeList = JSON.parse(localStorage["theArr"]);
+    localSHoeList = JSON.parse(localStorage.getItem('theArr'));
+    // console.log(localSHoeList);
+    theShoeFactory.settingLocal(localSHoeList);
+
+    console.log(theShoeFactory.values().theDisplay);
+    var localUserData = { 
+        shoes : theShoeFactory.values().theDisplay
+    };
+
+    localUserDataHTML = userTemplate(localUserData);
+    shoeSect.innerHTML = localUserDataHTML;
+
+    // localStorage.clear();
+       
+    
+};
     
 //Filter 
 filterButton.addEventListener("click", function(){
@@ -43,6 +68,11 @@ filterButton.addEventListener("click", function(){
     if (shoeSect.childElementCount === 0) {
         shoeSect.innerHTML = theShoeFactory.values().theError; 
     }
+
+    
+
+    // localStorage.setItem('theArr', JSON.stringify(theShoeFactory.values().theDisplay))
+    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
     
 });  
 
@@ -60,13 +90,14 @@ function addBtn(itt) {
    //display template
    var userData = { 
         shoes : theShoeFactory.values().theDisplay
+        // shoes : localSHoeList
     };
 
     userDataHTML = userTemplate(userData);
     shoeSect.innerHTML = userDataHTML;
    
     //cart template
-    var cartData = { 
+    var cartData = {
         
         shoes : theShoeFactory.set()
     };
@@ -76,6 +107,9 @@ function addBtn(itt) {
 
     grandTot.innerHTML = theShoeFactory.values().total;
 
+    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
+
+    
     
 }
 
@@ -102,6 +136,7 @@ function removeBtn(tag) {
 
     grandTot.innerHTML = theShoeFactory.values().total;
     
+    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
 }
 
 checkOut.addEventListener('click', function(){
@@ -116,6 +151,8 @@ checkOut.addEventListener('click', function(){
     shoeSect.innerHTML = userDataHTML;
     
     grandTot.innerHTML = theShoeFactory.resetTot();
+
+    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
 })
 
 
@@ -128,4 +165,8 @@ bag.addEventListener("click", function() {
 closeBag.addEventListener("click", function() {
     bagCont.classList.remove("show");
 })
+
+
+
+
 
