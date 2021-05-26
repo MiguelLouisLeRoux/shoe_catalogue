@@ -315,7 +315,6 @@ function shoeFactory() {
     function addingNewShoe() {
         for (var i = 0; i < newShoesList.length; i++) {
             var itt = newShoesList[i];
-            console.log(itt);
             shoeList.push(itt);
 
             newShoesList.shift();
@@ -324,8 +323,9 @@ function shoeFactory() {
         
     }
 
-    function settingLocal(list) {
+    function settingLocal(list, cartList) {
        display = list;
+       cart = cartList;
     }
 
 
@@ -338,6 +338,7 @@ function shoeFactory() {
             theCart : cartList,
             total : grandTot.toFixed(2),
             newShoe : newShoesList,
+            cart : cart,
             
         }
     }
