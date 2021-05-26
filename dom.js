@@ -13,9 +13,6 @@ var checkOut = document.querySelector(".check-out");
 
 //Factory function reference
 var theShoeFactory = shoeFactory();
-
-//Local Storage
-var localSHoeList
     
 //Template for displaying sneaker catalogue
 var templateSource = document.querySelector(".userTemplate").innerHTML;
@@ -26,29 +23,7 @@ var userData = {
 
 userDataHTML = userTemplate(userData);
 shoeSect.innerHTML = userDataHTML;
-
-//Local Storage
-
-if (localStorage["theArr"]) {
-
-    // localSHoeList = JSON.parse(localStorage["theArr"]);
-    localSHoeList = JSON.parse(localStorage.getItem('theArr'));
-    // console.log(localSHoeList);
-    theShoeFactory.settingLocal(localSHoeList);
-
-    console.log(theShoeFactory.values().theDisplay);
-    var localUserData = { 
-        shoes : theShoeFactory.values().theDisplay
-    };
-
-    localUserDataHTML = userTemplate(localUserData);
-    shoeSect.innerHTML = localUserDataHTML;
-
-    // localStorage.clear();
-       
-    
-};
-    
+  
 //Filter 
 filterButton.addEventListener("click", function(){
     var theBrand = brandFilter.value;
@@ -69,10 +44,7 @@ filterButton.addEventListener("click", function(){
         shoeSect.innerHTML = theShoeFactory.values().theError; 
     }
 
-    
-
-    // localStorage.setItem('theArr', JSON.stringify(theShoeFactory.values().theDisplay))
-    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
+    // localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
     
 });  
 
@@ -107,7 +79,7 @@ function addBtn(itt) {
 
     grandTot.innerHTML = theShoeFactory.values().total;
 
-    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
+    // localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
 
     
     
@@ -136,7 +108,7 @@ function removeBtn(tag) {
 
     grandTot.innerHTML = theShoeFactory.values().total;
     
-    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
+    // localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
 }
 
 checkOut.addEventListener('click', function(){
@@ -152,7 +124,7 @@ checkOut.addEventListener('click', function(){
     
     grandTot.innerHTML = theShoeFactory.resetTot();
 
-    localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
+    // localStorage["theArr"] = JSON.stringify(theShoeFactory.values().theDisplay);
 })
 
 
@@ -168,5 +140,20 @@ closeBag.addEventListener("click", function() {
 
 
 
+//Local Storage
+// if (localStorage["theArr"]) {
 
+    
+//     localSHoeList = JSON.parse(localStorage.getItem('theArr'));
+    
+//     theShoeFactory.settingLocal(localSHoeList);
+
+//     console.log(theShoeFactory.values().theDisplay);
+//     var localUserData = { 
+//         shoes : theShoeFactory.values().theDisplay
+//     };
+
+//     localUserDataHTML = userTemplate(localUserData);
+//     shoeSect.innerHTML = localUserDataHTML;    
+// };
 
