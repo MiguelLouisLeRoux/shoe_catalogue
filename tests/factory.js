@@ -1,4 +1,3 @@
-
 function shoeFactory() {
     var shoeList = [{image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2159410/original.jpg", brand: "Adidas", price: 2599.99, size: "9", stock: 10, colour: "White", tag: "A1", quantity: 1}, 
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2075782/original.jpg", brand: "Adidas", price: 2599.99, size: "8", stock: 13, colour: "Black", tag: "A2", quantity: 1}, 
@@ -21,25 +20,18 @@ function shoeFactory() {
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2133974/original.jpg", brand: "New Balance", price: 1299.99, size: "9", stock: 15, colour: "Blue", tag: "NB2", quantity: 1},
     {image: "https://assets.superbalistcdn.co.za/300x432/filters:quality(75):format(jpg)/2171200/original.jpg", brand: "New Balance", price: 1299.99, size: "8", stock: 13, colour: "Red", tag: "NB3", quantity: 1}]
 
-    //Filtered list
-    var display = shoeList;
-    
-    //Sneakers added to cart
-    var cartList = [];
-    var cart = [];
-    var ob = {};
+    //Cart list
+    var cart = {};
 
-    //Grand Total
-    var grandTot = 0.00;
-    
+    //Grand Total 
+    var total = 0.00;
+
     //User messages
     var error = "Sorry, No match found.";
     var noStock = "Out of stock";
 
-    //User support 
-    var newShoesList = [];
-    var newObj = {};
-    
+    //User Support Out of Stock list 
+    var outOfStock = [];
 
     //Filtering
     function filtering(brands, colour, size) {
@@ -47,60 +39,57 @@ function shoeFactory() {
         for (var i = 0; i <shoeList.length; i++) {
 
             var itt = shoeList[i];
-            
-            if (itt.brand === brands && itt.colour === colour && itt.size === size) {
 
+            if (itt.brand === brands && itt.colour === colour && itt.size === size) {
                 var filt = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.colour === colour && itt.size === size;
                 })
-                display = filt;
+
                 return filt;
 
             } else if (itt.colour === colour && itt.size === size && brands === "All") {
                 var filt2 = shoeList.filter(function(itt){
                     return itt.colour === colour && itt.size === size;
                 })
-                display = filt2;
+
                 return filt2;
 
             } else if (itt.brand === brands && itt.size === size && colour === "All") {
                 var filt3 = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.size === size;
                 })
-                display = filt3;
+
                 return filt3;
 
             } else if (itt.brand === brands && itt.colour === colour && size === "All") {
                 var filt4 = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.colour === colour;
                 })
-                display = filt4;
+
                 return filt4;
-            
 
             } else if (itt.brand === brands && colour === "All" && size === "All") {
                 var filt5 = shoeList.filter(function(itt){
                     return itt.brand === brands;
                 })
-                display = filt5;
+
                 return filt5;
-            
+
             } else if (itt.colour === colour && brands === "All" && size === "All") {
                 var filt6 = shoeList.filter(function(itt){
                     return itt.colour === colour;
                 })
-                display = filt6;
+
                 return filt6;
-            
+
             } else if (itt.size === size && brands === "All" && colour === "All") {
                 var filt7 = shoeList.filter(function(itt){
                     return itt.size === size;
                 })
-                display = filt7;
+
                 return filt7;
 
-            } else if (brands === "All" && colour === "All" && size === "All") {
-                display = shoeList;
+            } else if (brands === "All" && colour === "All" && size === "All") {    
                 return shoeList;
             }
         }
@@ -108,251 +97,111 @@ function shoeFactory() {
     
     //Adding to cart
     function addCart(tag) {
-        
-        //Decrement when adding to cart
-        for (var j = 0; j < shoeList.length; j++) {
-            
-            var itt2 = shoeList[j];
-            
-            if (tag === itt2.tag) {
+        for (var i = 0; i < shoeList.length; i++) {
+
+            var itt = shoeList[i];
+
+            if (itt.tag === tag) {
                 
-                if (itt2.stock > 1) {
+                if (itt.stock > 1) {
+                    itt.stock--;
 
-                    itt2.stock--;
-                    
-                    cartList.push(itt2);
+                   if (!cart.hasOwnProperty(itt.tag)) {
+                        cart[itt.tag] = itt;
+                        total += itt.price;
+                    } else if(cart.hasOwnProperty(itt.tag)) {
+                       
+                        cart[itt.tag].quantity++;
+                        total += itt.price;
 
-                    grandTot += itt2.price;
-
-                    if (!ob.hasOwnProperty(itt2.tag)) {
-                        ob[itt2.tag] = 1;
-                    } else if (ob.hasOwnProperty(itt2.tag)){
-                        ob[itt2.tag]++;
-                    }
-                    
-                } else if (itt2.stock === 1) {
-                    
-                    itt2.stock--;
-                    
-                    cartList.push(itt2);
-
-                    grandTot += itt2.price;
-
-                    if (!ob.hasOwnProperty(itt2.tag)) {
-                        ob[itt2.tag] = 1;
-                    } else if (ob.hasOwnProperty(itt2.tag)){
-                        ob[itt2.tag]++;
                     }
 
-                    itt2.stock = noStock;
+                } else if (itt.stock === 1) {
                     
+                    cart[itt.tag].quantity++;
+                    total += itt.price;
+                    itt.stock = noStock;
+    
                 }
-                    
-                
-
             }
-            
-        }
-      
-    }
-
-    //Adding and updating cart data
-    function set() {
-        
-        let uniqueChars = [...new Set(cartList)];
-        cart = uniqueChars;
-        
-
-        for (var i = 0; i < cart.length; i++) {
-            var itt = cart[i];
-
-            if (ob.hasOwnProperty(itt.tag)) {
-                itt.quantity = ob[itt.tag]
-            }
-        }
-        
-        return cart;
-        
+        }  
     }
 
     //Removing from cart
     function remove(tag) {
-        
-        for (var i = 0; i < cart.length; i++) {
-
-            var itt = cart[i];
-
-            if (grandTot > 0) {
-            
-                if (tag === itt.tag) {
-                    grandTot -= itt.price;
-                    console.log(cart);
-                }     
-            } else if (grandTot <= 0){
-                grandTot = 0.00;
-            }
-
-            
+        for (var i = 0; i < shoeList.length; i++) {
+            var itt = shoeList[i];
 
             if (itt.tag === tag) {
-                if (itt.quantity > 1) {
-                    itt.quantity -= 1;
 
-                    for (const theProp in ob) {
-                        if (itt.tag === theProp) {
-                            ob[theProp]--;
-                        
-                        }
-                        
-                    }
+                if (itt.stock === noStock) {
+                    itt.stock = 1;
+                    itt.quantity--;
+                    total -= itt.price;
 
-                    for (var k = 0; k < shoeList.length; k++) {
-                        var theItt = shoeList[k];
-
-                        if (theItt.tag === tag) {
-                            if (theItt.stock === noStock) {
-                                theItt.stock = 1;
-                            } else {
-                                theItt.stock++;
-                            }
-                            
-                        }
-                    }
-
-                    return cart;
+                } else if (itt.stock >= 1 && itt.quantity > 1) {
+                    itt.stock++;
+                    itt.quantity--;
+                    total -= itt.price;
 
                 } else if (itt.quantity === 1) {
 
-                    for (const prop in ob) {
-                        if (prop === itt.tag) {
-                            delete ob[prop];
-                        }
-                    }
+                    itt.stock++;
+                    total -= itt.price;
 
-                    let uniqueChars = [...new Set(cartList)];
-                    cartList = uniqueChars;
+                    delete cart[tag];
 
-                    for (var j = 0; j < cartList.length; j++) {
-                        var itt2 = cartList[j];
-
-                        if (itt.tag === itt2.tag) {
-                            let index1 = cartList.indexOf(itt2);
-                        
-                            if (index1 > -1) {
-                                cartList.splice(index1, 1);
-                            }
-                        }
-                    
-                    }
-
-                    for (var l = 0; l < shoeList.length; l++) {
-                        var theItt1 = shoeList[l];
-
-                        if (theItt1.tag === tag) {
-
-                            theItt1.stock++;
-                        
-                        }
-                    }
-
-                    let index = cart.indexOf(itt);
-                    if (index > -1) {
-                    cart.splice(index, 1);
-                    return cart;
-                    }
-                    
                 }
                 
             }
-        }
+        } 
+           
     }
 
-    //Reseting total after checkout
-    function resetTot() {
-        grandTot = 0.00;
-        return grandTot.toFixed(2);
-    }
+    //Checking out from cart 
+    function checkOut() {
+        total = 0.00;
+        cart = {};
 
-    //Emptying cart after checkout
-    function emptyCart() {
+        for (var i = 0; i < shoeList.length; i++) {
 
-        for (var i = 0; i < display.length; i++) {
             var itt = shoeList[i];
 
             if (itt.stock === noStock) {
+
+                outOfStock.push(itt);
+
                 let index = shoeList.indexOf(itt);
                 if (index > -1) {
                     shoeList.splice(index, 1);
                 }
             }
+
         }
-
-        cartList = [];
-        cart = [];
-        ob = {};
-        return cart;
     }
 
-    function userSupport(link, brand, colour, size, stock, tag, price) {
-        this.image = link;
-        this.brand = brand;
-        this.colour = colour;
-        this.size = size;
-        this.stock = stock
-        this.tag = tag;
-        this.price = price;
+    function localStorageSetting(theShoeList, theCartList, theTotal) {
+        shoeList = theShoeList;
+        cart = theCartList;
+        total = theTotal;
     }
-
-    function newShoe(link, brand, colour, size, stock, tag, price) {
-
-        var theNewShoe = new userSupport(link, brand, colour, size, stock, tag, price);
-        
-
-        
-        newShoesList.push(theNewShoe);
-    }
-
-    function addingNewShoe() {
-        for (var i = 0; i < newShoesList.length; i++) {
-            var itt = newShoesList[i];
-            shoeList.push(itt);
-
-            newShoesList.shift();
-        }
-
-        
-    }
-
-    function settingLocal(list, cartList) {
-       display = list;
-       cart = cartList;
-    }
-
 
     function values() {
         return {
             theList : shoeList,
-            theDisplay : display,
             theError : error,
             outOfStock : noStock,
-            theCart : cartList,
-            total : grandTot.toFixed(2),
-            newShoe : newShoesList,
             cart : cart,
-            
+            total : total.toFixed(2),
+            stockList : outOfStock,
         }
     }
 
     return { values,
              filtering,
              addCart,
-             set,
              remove,
-             resetTot,
-             emptyCart,
-             newShoe,
-             addingNewShoe,
-             settingLocal,
-           
+             checkOut,
+             localStorageSetting,
     }
 }

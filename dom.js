@@ -11,13 +11,16 @@ var filterButton = document.querySelector(".filtButton");
 var grandTot = document.querySelector(".theTot");
 var checkOut = document.querySelector(".check-out");
 
+
+
 //Factory function reference
 var theShoeFactory = shoeFactory();
 
-//Local Storage
-var localCartList = theShoeFactory.values().cart;
-var localShoeCatalogue = theShoeFactory.values().theDisplay;
-    
+//Local Storage Variables
+var localShoeList;
+var localCartList;
+var localTotal;
+
 //Template for displaying sneaker catalogue
 var templateSource = document.querySelector(".userTemplate").innerHTML;
 var userTemplate = Handlebars.compile(templateSource);
@@ -27,9 +30,11 @@ var userData = {
 
 userDataHTML = userTemplate(userData);
 shoeSect.innerHTML = userDataHTML;
+    
 
 //Filter
 filterButton.addEventListener("click", function(){
+   //Filtering Values
     var theBrand = brandFilter.value;
     var theColour = colourFilter.value;
     var theSize = sizeFilter.value;
@@ -56,21 +61,25 @@ var cartTemplate = Handlebars.compile(cartTemplateSource);
 
 
 function addBtn(itt) {
-    
-   theShoeFactory.addCart(itt);
 
-   //display template
-   var userData = { 
-        shoes : theShoeFactory.values().theDisplay
+    theShoeFactory.addCart(itt);
+   
+    var theBrand = brandFilter.value;
+    var theColour = colourFilter.value;
+    var theSize = sizeFilter.value;
+
+    var filteredData = {
+        shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
     };
 
-    userDataHTML = userTemplate(userData);
-    shoeSect.innerHTML = userDataHTML;
-   
+    filteredDataHTML = userTemplate(filteredData);
+    shoeSect.innerHTML = filteredDataHTML;
+
     //cart template
     var cartData = {
         
-        shoes : theShoeFactory.set()
+        shoes : theShoeFactory.values().cart
+
     };
 
     cartDataHTML = cartTemplate(cartData);
@@ -78,55 +87,67 @@ function addBtn(itt) {
 
     grandTot.innerHTML = theShoeFactory.values().total;
 
-    localShoeCatalogue = theShoeFactory.values().theDisplay;
-    localCartList = theShoeFactory.values().cart;
-
-    console.log(localCartList);
-    console.log(localShoeCatalogue);
+    localStorage["shoeList"] = JSON.stringify(theShoeFactory.values().theList);
+    localStorage["cartList"] = JSON.stringify(theShoeFactory.values().cart);
+    localStorage["total"] = theShoeFactory.values().total;
+    localStorage["outOfStock"] = JSON.stringify(theShoeFactory.values().stockList);
 }
 
 function removeBtn(tag) {
-    //cart template
-    cart.innerHTML = "";
+    theShoeFactory.remove(tag);
 
-    var cartData = { 
+    var theBrand = brandFilter.value;
+    var theColour = colourFilter.value;
+    var theSize = sizeFilter.value;
+
+    var filteredData = {
+        shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
+    };
+
+    filteredDataHTML = userTemplate(filteredData);
+    shoeSect.innerHTML = filteredDataHTML;
+    
+    var cartData = {
         
-        shoes : theShoeFactory.remove(tag)
+        shoes : theShoeFactory.values().cart
+
     };
 
     cartDataHTML = cartTemplate(cartData);
     cart.innerHTML = cartDataHTML;
 
-
-    //display template
-    var userData = { 
-        shoes : theShoeFactory.values().theDisplay
-    };
-
-    userDataHTML = userTemplate(userData);
-    shoeSect.innerHTML = userDataHTML;
-
     grandTot.innerHTML = theShoeFactory.values().total;
-    
-    localShoeCatalogue = theShoeFactory.values().theDisplay;
-    localCartList = theShoeFactory.values().cart;
+
+    localStorage["shoeList"] = JSON.stringify(theShoeFactory.values().theList);
+    localStorage["cartList"] = JSON.stringify(theShoeFactory.values().cart);
+    localStorage["total"] = theShoeFactory.values().total;
+    localStorage["outOfStock"] = JSON.stringify(theShoeFactory.values().stockList);
 }
 
-checkOut.addEventListener('click', function(){
-    cart.innerHTML = "";
-    theShoeFactory.emptyCart();
 
-    var userData = { 
-        shoes : theShoeFactory.values().theDisplay
+//Checkout
+checkOut.addEventListener("click", function(){
+    theShoeFactory.checkOut();
+
+    var theBrand = brandFilter.value;
+    var theColour = colourFilter.value;
+    var theSize = sizeFilter.value;
+
+    var filteredData = {
+        shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
     };
 
-    userDataHTML = userTemplate(userData);
-    shoeSect.innerHTML = userDataHTML;
+    filteredDataHTML = userTemplate(filteredData);
+    shoeSect.innerHTML = filteredDataHTML;
     
-    grandTot.innerHTML = theShoeFactory.resetTot();
+    cart.innerHTML = "";
 
-    localShoeCatalogue = theShoeFactory.values().theDisplay;
-    localCartList = theShoeFactory.values().cart;
+    grandTot.innerHTML = theShoeFactory.values().total;
+
+    localStorage["shoeList"] = JSON.stringify(theShoeFactory.values().theList);
+    localStorage["cartList"] = JSON.stringify(theShoeFactory.values().cart);
+    localStorage["total"] = theShoeFactory.values().total;
+    localStorage["outOfStock"] = JSON.stringify(theShoeFactory.values().stockList);
 })
 
 
@@ -140,32 +161,36 @@ closeBag.addEventListener("click", function() {
     bagCont.classList.remove("show");
 })
 
-//Local Storage
-localStorage["theCatalogue"] = JSON.stringify(localShoeCatalogue);
-localStorage["theCart"] = JSON.stringify(localCartList);
 
-if (localStorage["theCatalogue"] && localStorage["theCart"]) {
+if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"] && localStorage["outOfStock"]) {
 
-    localCartList = JSON.parse(localStorage["theCart"]);
-    localShoeCatalogue = JSON.parse(localStorage["theCatalogue"]);
+    localShoeList = JSON.parse(localStorage["shoeList"]);
+    localCartList = JSON.parse(localStorage["cartList"]);
+    localTotal = Number(localStorage["total"]);
 
-    theShoeFactory.settingLocal(localShoeCatalogue, localCartList);
+    theShoeFactory.localStorageSetting(localShoeList, localCartList, localTotal);
 
-    
-    
-    var localUserData = { 
-        shoes : theShoeFactory.values().theDisplay
+    var theBrand = brandFilter.value;
+    var theColour = colourFilter.value;
+    var theSize = sizeFilter.value;
+
+    var filteredData = {
+        shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
     };
 
-    localUserDataHTML = userTemplate(localUserData);
-    shoeSect.innerHTML = localUserDataHTML;
+    filteredDataHTML = userTemplate(filteredData);
+    shoeSect.innerHTML = filteredDataHTML;
 
-
-    var cartData = { 
+    var cartData = {
         
         shoes : theShoeFactory.values().cart
+       
     };
 
     cartDataHTML = cartTemplate(cartData);
     cart.innerHTML = cartDataHTML;
-};
+
+    grandTot.innerHTML = theShoeFactory.values().total;
+  
+    
+}

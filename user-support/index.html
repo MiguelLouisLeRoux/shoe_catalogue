@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="user-support-simple-grid.css">
-    <title>User Support</title>
+    <link rel="stylesheet" href="user-support.css">
+    <title>Lubobalo's User Support</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script type="text/x-template" class="userTemplate">
         {{#each shoes}}
@@ -15,129 +15,27 @@
                 <br>
                 <li><strong>Brand:</strong> {{brand}}</li>
                 <li><strong>Size:</strong> {{size}}</li>
-                <li><strong>Stock:</strong> {{stock}}</li>
+                <li><strong>Stock:</strong> <span class="outStock">{{stock}}<span></li>
                 <li><strong>Price:</strong>  R{{price}}</li>
             </div>
         {{/each}}
     </script>
 </head>
 <body>
-    <header>
-        <span class="title">Lubabalo's User Support</span>
-    </header>
-    <br>
-    
+
+    <header>User Support</header>
+
     <div class="container">
-        <div class="row">
-            <div class="col-6" id="col6">
-                    
-                    <div class="newAdd">
+        <div class="out-stock">
+            <strong><h5>Out of Stock</h5></strong>
+            <div class="stock-list">
 
-                        <strong><h3>Insert New Product</h3></strong>
-                       
-                        <div class="col-5">
-                            <strong>Add image link below <link rel="stylesheet" href=""></strong>
-                            <br>
-                            
-                            <input class="addImage" type="link" placeholder="Enter here">
-                            <br>
-                            <br>
-                            <label>
-                            <strong>Brand:</strong>
-                            <br>
-                                <select class="brand">
-                                    <option>Adidas</option>
-                                    <option>Converse</option>
-                                    <option>Asics</option>
-                                    <option>New Balance</option>
-                                    <option>Nike</option>
-                                </select>
-                            </label>
-                            <br>
-                            <br>
-                            <label>
-                                <strong>Colour:</strong>
-                                <br>
-                                <select class="colour">
-                                    <option>White</option>
-                                    <option>Grey</option>
-                                    <option>Black</option>
-                                    <option>Blue</option>
-                                    <option>Green</option>
-                                    <option>Red</option>
-                                </select>
-                            </label>
-                            <br>
-                            <br>
-                            <label>
-                                <strong>Price:</strong>
-                                <br>
-    
-                                <span><strong>R  </strong><input class="price" type="text" placeholder="0.00"></span>
-                            </label>
-                           
-                            
-                        </div>
-                        <div class="col-5">
-
-                            <label>
-                                <strong>Size:</strong>
-                                <br>
-                                <select class="size">
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                </select>
-                                <br>
-                                <br>
-                            </label>
-                            
-                            <label><strong>Stock:</strong>
-                                <br>
-                                <input class="stock" type="number" placeholder="e.g. 5">
-                            </label>
-                            <br>
-                            <br>
-                            <label><strong>Tag:</strong>
-                                <br>
-                                <input class="tag" type="text" placeholder="Enter shoe ID here">
-                            </label>
-                            <br>
-                            <br>  
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="center">
-                        <button class="displayShoe">Preview</button>
-                    </div>
-                    
-            </div>
-            
-            <div class="col-6">
-                <div class="center">
-                    <strong><h3>Preview New Product</h3></strong>
-                    
-                    <div class="displayNewShoe">
-                    
-                    </div>
-                </div>
-                
             </div>
         </div>
-        <div class="row">
-            <div class="center">
-                <br>
-                <br>
-                <br>
-                <button class="addShoe">Add to catalogue</button>
-                <button class="catalogue"><a href="../index.html">Go to catalogue</a></button>
-                <br>
-                <br>
-            </div>
+        <br>
+        <br>
+        <div class="new-stock">
+
         </div>
     </div>
     <script src="../tests/factory.js"></script>
