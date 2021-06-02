@@ -12,7 +12,7 @@ var grandTot = document.querySelector(".theTot");
 var checkOut = document.querySelector(".check-out");
 
 
-// localStorage.clear();
+
 //Factory function reference
 var theShoeFactory = shoeFactory();
 
