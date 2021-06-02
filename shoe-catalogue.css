@@ -251,6 +251,10 @@ li {
   
 }
 
+.bag-content {
+  min-height: 5rem;
+}
+
 .bag-content button {
   cursor: pointer;
   background-color: coral;
@@ -444,6 +448,10 @@ img {
   .hidden-sm {
     display: block;
   }
+
+  .bag-content {
+    min-height: 10rem;
+  }
 }
 
 @media only screen and (min-width: 60em) { /* 960px */
@@ -471,5 +479,9 @@ img {
 
   select {
     font-size: 1rem;
+  }
+
+  .bag-content {
+    min-height: 20rem;
   }
 }

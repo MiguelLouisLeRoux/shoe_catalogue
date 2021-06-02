@@ -71,10 +71,10 @@ function addBtn(itt) {
     var filteredData = {
         shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
     };
-
+    localStorage.clear();
     filteredDataHTML = userTemplate(filteredData);
     shoeSect.innerHTML = filteredDataHTML;
-
+    
     //cart template
     var cartData = {
         

@@ -33,6 +33,11 @@ function shoeFactory() {
     //User Support Out of Stock list 
     var outOfStock = [];
 
+    //User Support
+    var newShoesList = [];
+    var reg1 = /([1-9]){3}.([0-9]){2}/g;
+    var reg2 = /([1-9]){4}.([0-9]){2}/g;
+
     //Filtering
     function filtering(brands, colour, size) {
         
@@ -180,6 +185,34 @@ function shoeFactory() {
         }
     }
 
+    function userSupport(link, brand, colour, size, stock, tag, price) {
+        this.image = link;
+        this.brand = brand;
+        this.colour = colour;
+        this.size = size;
+        this.stock = stock
+        this.tag = tag;
+        this.price = price;
+    }
+
+    function newShoe(link, brand, colour, size, stock, tag, price) {
+
+        newShoesList.shift();
+
+        var theNewShoe = new userSupport(link, brand, colour, size, stock, tag, price);
+    
+        newShoesList.push(theNewShoe);
+    }
+
+    function addingNewShoe() {
+        for (var i = 0; i < newShoesList.length; i++) {
+            var itt = newShoesList[i];
+            // shoeList.push(itt);
+
+            return itt;            
+        }   
+    }
+
     function localStorageSetting(theShoeList, theCartList, theTotal) {
         shoeList = theShoeList;
         cart = theCartList;
@@ -194,6 +227,7 @@ function shoeFactory() {
             cart : cart,
             total : total.toFixed(2),
             stockList : outOfStock,
+            newShoesList : newShoesList,
         }
     }
 
@@ -202,6 +236,8 @@ function shoeFactory() {
              addCart,
              remove,
              checkOut,
+             newShoe,
+             addingNewShoe,
              localStorageSetting,
     }
 }

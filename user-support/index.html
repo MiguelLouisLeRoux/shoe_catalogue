@@ -21,6 +21,20 @@
             </div>
         {{/each}}
     </script>
+
+    <script type="text/x-template" class="previewTemplate">
+        {{#each shoes}}
+            <div class="shoe">
+                <img src={{image}}>
+                <br>
+                <br>
+                <li><strong>Brand:</strong> {{brand}}</li>
+                <li><strong>Size:</strong> {{size}}</li>
+                <li><strong>Stock:</strong> <span>{{stock}}<span></li>
+                <li><strong>Price:</strong>  R{{price}}</li>
+            </div>
+        {{/each}}
+    </script>
 </head>
 <body>
 
@@ -36,6 +50,7 @@
         <br>
         <br>
         <div class="new-stock">
+<<<<<<< HEAD
             <h5>Add New Stock</h5>
             <br>
             <div class="grid">
@@ -77,7 +92,102 @@
     
                 </div>
             </div>
+=======
+            <strong><h5>New Stock</h5></strong>
+            <br>
+            <br>
+            <div class="new-sect">
+                <div class="new">
+                    <div class="new-stock">
+                        <fieldset class="add-new">
+                            <legend>Details</legend>
+                                <br>
+                                <div class="the-link">
+                                    <label for="link">Image link:</label>
+                                    <input type="url" class="link" placeholder="Enter here">
+                                </div>
+                                <br>
+                                <div class="the-brand">
+                                    <label for="brand">Brand:</label>
+                                    <select class="brand">
+                                        <option>Select</option>
+                                        <option>Adidas</option>
+                                        <option>Converse</option>
+                                        <option>Asics</option>
+                                        <option>New Balance</option>
+                                        <option>Nike</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="colour-size">
+                                    <label for="colour" class="colour">Colour:</label>
+                                    <select class="colour" id="the-col">
+                                        <option>Select</option>
+                                        <option>White</option>
+                                        <option>Grey</option>
+                                        <option>Black</option>
+                                        <option>Blue</option>
+                                        <option>Green</option>
+                                        <option>Red</option>
+                                    </select>
+                                    <br>
+                                    <label for="size" class="size" id="the-size">Size:</label>
+                                    <select class="size" id="sel-size">
+                                        <option>Select</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="stock-tag">
+                                    <label for="stock">Stock:</label>
+                                    <input type="number" class="stock" placeholder="1">
+                                    <br>
+                                    <label for="tag">Item ID:</label>
+                                    <input type="text" class="tag" placeholder="e.g. A12">
+                                    <br>
+                                    <label for="price">Price:</label>
+                                    <input type="text" class="price" placeholder="000.00">
+                                </div>
+                                <br>
+                                <br>
+                               
+                                <button class="preview">Preview</button>
+                                <button class="remove">Remove</button>
+                                <br>
+                           
+                        </fieldset>
+                    </div>
+                    
+                    <fieldset class="display-preview">
+                        <legend>Sneaker Preview</legend>
+                        <div class="center">
+                            <div class="new-shoe-sect">
+
+                            </div>
+                        </div>
+                        
+                    </fieldset>
+                    
+                </div>
+            </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <div class="buttons">
+            <button class="add">Add to Catalogue</button>
+            <span class="gap"></span>
+            <button class="catalogue"><a href="../index.html">Go to Catalogue</a></button>
+>>>>>>> 70fcaa4531a70f7cb91724c13dbdb73874f9173b
+        </div>
+        <br>
+        <br>
+        <br>
     </div>
     <script src="../tests/factory.js"></script>
     <script src="user-support.js"></script>
