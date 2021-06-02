@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="user-support.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <title>Lubobalo's User Support</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script type="text/x-template" class="userTemplate">
@@ -29,13 +30,53 @@
         <div class="out-stock">
             <strong><h5>Out of Stock</h5></strong>
             <div class="stock-list">
-
+                
             </div>
         </div>
         <br>
         <br>
         <div class="new-stock">
+            <h5>Add New Stock</h5>
+            <br>
+            <div class="grid">
+                <div class="form">
+                    <fieldset>
+                        <legend><strong class="details">Details</strong></legend>
 
+                        <form>
+                          <label>Image: </label>
+                          <input type="text" placeholder="Insert image url">
+                          <br>
+                          <br>
+                          <label>Brand:</label>
+                          <select class="brand">
+                            <option>Select</option>
+                            <option>Adidas</option>
+                            <option>Converse</option>
+                            <option>Asics</option>
+                            <option>New Balance</option>
+                            <option>Nike</option>
+                          </select>
+                          <br>
+                          <br>
+                          <label>Colour:</label>
+                            <select class="colour">
+                                <option>All</option>
+                                <option>White</option>
+                                <option>Grey</option>
+                                <option>Black</option>
+                                <option>Blue</option>
+                                <option>Green</option>
+                                <option>Red</option>
+                            </select>
+                        
+                        </form>
+                    </fieldset>
+                </div>
+                <div class="preview">
+    
+                </div>
+            </div>
         </div>
     </div>
     <script src="../tests/factory.js"></script>
