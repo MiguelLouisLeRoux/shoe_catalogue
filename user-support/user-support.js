@@ -9,7 +9,9 @@ const stock = document.querySelector(".stock");
 const tag = document.querySelector(".tag");
 const colour = document.getElementById("the-col");
 const price = document.querySelector(".price");
+const clear = document.querySelector(".remove");
 const newShoe_sect = document.querySelector(".new-shoe-sect");
+
 var previewTemplateSource = document.querySelector(".previewTemplate").innerHTML;
 
 var fact = shoeFactory();
@@ -28,7 +30,11 @@ preview.addEventListener('click', function(){
 
     
 });
-// localStorage.clear();
+
+clear.addEventListener('click', function(){
+    location.reload();
+})
+
 addShoe.addEventListener('click', function(){
 
     // console.log(localStorage["shoeList"]);
@@ -54,3 +60,16 @@ if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"
     outStock.innerHTML = userDataHTML;
     
 }
+
+price.addEventListener('change', function (){
+    fact.regExCost(price.value);
+})
+
+
+//Preventing stock from decreasing below 1
+stock.addEventListener('change', function(){
+    console.log(stock.value);
+    if (stock.value === "" || stock.value < 1) {
+        stock.value = 1;
+    }
+})

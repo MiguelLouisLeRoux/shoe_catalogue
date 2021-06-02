@@ -301,16 +301,17 @@ td {
 }
 
 .check-out {
-  margin-left: 14em;
-  /* margin-left: auto; */
-}
+  float: right;
+  margin-top: 1em;
+  margin-right: 1em;
+} 
 
-/* .t {
+.tot {
   display: block;
   float: left;
-  margin-right: auto;
-} */
-
+  margin-top: 1em;
+  margin-left: 1em;
+}
 .check-out:hover {
   background-color: seagreen;
   transition: 300ms;

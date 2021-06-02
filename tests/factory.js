@@ -219,6 +219,14 @@ function shoeFactory() {
         total = theTotal;
     }
 
+    function regExCost(cost) {
+        if(reg1.test(cost) || reg2.test(cost)){
+            console.log(true);
+        } else {
+            console.log(false);
+        }
+    }
+
     function values() {
         return {
             theList : shoeList,
@@ -239,5 +247,7 @@ function shoeFactory() {
              newShoe,
              addingNewShoe,
              localStorageSetting,
+             regExCost,
+
     }
 }

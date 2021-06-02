@@ -173,7 +173,7 @@ if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"
     var theBrand = brandFilter.value;
     var theColour = colourFilter.value;
     var theSize = sizeFilter.value;
-
+    
     var filteredData = {
         shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
     };
