@@ -28,7 +28,7 @@ preview.addEventListener('click', function(){
 
     
 });
-localStorage.clear();
+// localStorage.clear();
 addShoe.addEventListener('click', function(){
 
     // console.log(localStorage["shoeList"]);
