@@ -167,8 +167,9 @@ if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"
     localShoeList = JSON.parse(localStorage["shoeList"]);
     localCartList = JSON.parse(localStorage["cartList"]);
     localTotal = Number(localStorage["total"]);
+    localOutStock = JSON.parse(localStorage["outOfStock"]);
 
-    theShoeFactory.localStorageSetting(localShoeList, localCartList, localTotal);
+    theShoeFactory.localStorageSetting(localShoeList, localCartList, localTotal, localOutStock);
 
     var theBrand = brandFilter.value;
     var theColour = colourFilter.value;
@@ -193,4 +194,15 @@ if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"
     grandTot.innerHTML = theShoeFactory.values().total;
   
     
+} else if (localStorage["shoeList"]) {
+    var newList = JSON.parse(localStorage["shoeList"]);
+    
+    theShoeFactory.resetShoeList(newList);
+
+    var filteredData = {
+        shoes : theShoeFactory.values().theList
+    };
+
+    filteredDataHTML = userTemplate(filteredData);
+    shoeSect.innerHTML = filteredDataHTML;
 }

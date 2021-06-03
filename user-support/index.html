@@ -17,6 +17,7 @@
                 <li><strong>Size:</strong> {{size}}</li>
                 <li><strong>Stock:</strong> <span class="outStock">{{stock}}<span></li>
                 <li><strong>Price:</strong>  R{{price}}</li>
+                <li><strong>Item Tag:</strong> {{tag}}</li>
             </div>
         {{/each}}
     </script>
@@ -41,7 +42,12 @@
 
     <div class="container">
         <div class="out-stock">
-            <strong><h5>Out of Stock</h5></strong>
+            <strong class="out-stock-title"><h5>Out of Stock</h5></strong>
+            <br>
+            <div class="mess">
+                <strong><span class="no-stock">There are currently no items out of stock.</span></strong>
+            </div>
+            
             <div class="stock-list">
 
             </div>
@@ -56,8 +62,10 @@
                 <div class="new">
                     <div class="new-stock">
                         <fieldset class="add-new">
-                            <legend>Details</legend>
-                                <br>
+                            <strong class="new-add">Details</strong>
+                            <br>
+                            <br>
+                            <div class="centering">
                                 <div class="the-link">
                                     <label for="link">Image link:</label>
                                     <input type="url" class="link" placeholder="Enter here">
@@ -111,16 +119,17 @@
                                 </div>
                                 <br>
                                 <br>
-                               
+                                
                                 <button class="preview">Preview</button>
                                 <button class="remove">Clear</button>
-                                <br>
-                           
+                                <br>   
+                            </div>
                         </fieldset>
                     </div>
                     
                     <fieldset class="display-preview">
-                        <legend>Sneaker Preview</legend>
+                        <strong class="sneaker-preview">Sneaker Preview</strong>
+                        <br>
                         <div class="center">
                             <div class="new-shoe-sect">
 
@@ -134,6 +143,7 @@
         </div>
         <br>
         <br>
+        <div class="addError"></div>
         <br>
         <div class="buttons">
             <button class="add">Add to Catalogue</button>

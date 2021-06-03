@@ -35,8 +35,17 @@ function shoeFactory() {
 
     //User Support
     var newShoesList = [];
-    var reg1 = /([1-9]){3}.([0-9]){2}/g;
-    var reg2 = /([1-9]){4}.([0-9]){2}/g;
+    var reg1 = /^[1-9]\d{0,3}\.\d{2}$/;
+
+    //User support error messages
+    var imgLink = "Enter image link.";
+    var tagID = "Enter shoe ID tag.";
+    var price = "Enter price.";
+    var theBrand = "Select a brand.";
+    var theColour = "Select a colour";
+    var theSize = "Select a size";
+    var addShoe = "Preview item before adding to catalogue."
+    
 
     //Filtering
     function filtering(brands, colour, size) {
@@ -194,7 +203,7 @@ function shoeFactory() {
         this.tag = tag;
         this.price = price;
     }
-
+    
     function newShoe(link, brand, colour, size, stock, tag, price) {
 
         newShoesList.shift();
@@ -207,24 +216,46 @@ function shoeFactory() {
     function addingNewShoe() {
         for (var i = 0; i < newShoesList.length; i++) {
             var itt = newShoesList[i];
-            // shoeList.push(itt);
-
-            return itt;            
+            shoeList.push(itt);
+                
         }   
     }
 
-    function localStorageSetting(theShoeList, theCartList, theTotal) {
+    function localStorageSetting(theShoeList, theCartList, theTotal, outStock) {
         shoeList = theShoeList;
         cart = theCartList;
         total = theTotal;
+        outOfStock = outStock;
     }
 
     function regExCost(cost) {
-        if(reg1.test(cost) || reg2.test(cost)){
-            console.log(true);
+        
+        if(/^[1-9]\d{0,3}\.\d{2}$/.test(cost)){
+            
+            return cost;
+
         } else {
-            console.log(false);
+           
+            return "Incorrect price format.";
         }
+    }
+
+    function checkTag(theTag) {
+        var trimTag = theTag.trim();
+        
+        for (var i = 0; i < shoeList.length; i++) {
+            var itt = shoeList[i];
+            
+            if (itt.tag === trimTag) {
+                return "ID already exists.";
+            }  
+        }
+        return trimTag;
+    }
+
+    //reseting shoe list from user support local storage sect
+    function resetShoeList(localList) {
+        shoeList = localList;
     }
 
     function values() {
@@ -236,6 +267,13 @@ function shoeFactory() {
             total : total.toFixed(2),
             stockList : outOfStock,
             newShoesList : newShoesList,
+            errorSize : theSize,
+            errorColour : theColour,
+            errorBrand : theBrand,
+            errorPrice : price,
+            errorTag : tagID,
+            errorImage : imgLink,
+            addError : addShoe,
         }
     }
 
@@ -248,6 +286,7 @@ function shoeFactory() {
              addingNewShoe,
              localStorageSetting,
              regExCost,
-
+             checkTag,
+             resetShoeList,
     }
 }
