@@ -120,19 +120,22 @@ function shoeFactory() {
                 if (itt.stock > 1) {
                     itt.stock--;
 
-                   if (!cart.hasOwnProperty(itt.tag)) {
-                        cart[itt.tag] = itt;
+                    if (!cart.hasOwnProperty(tag)) {
+                        cart[tag] = itt;
+                        
                         total += itt.price;
-                    } else if(cart.hasOwnProperty(itt.tag)) {
-                       
-                        cart[itt.tag].quantity++;
+
+                    } else if(cart.hasOwnProperty(tag)) {
+                    
+                        cart[tag].quantity++;
+                    
                         total += itt.price;
 
                     }
 
                 } else if (itt.stock === 1) {
                     
-                    cart[itt.tag].quantity++;
+                    cart[tag].quantity++;
                     total += itt.price;
                     itt.stock = noStock;
     
@@ -150,15 +153,23 @@ function shoeFactory() {
 
                 if (itt.stock === noStock) {
                     itt.stock = 1;
-                    itt.quantity--;
+                    
                     total -= itt.price;
 
-                } else if (itt.stock >= 1 && itt.quantity > 1) {
+                    cart[tag].quantity--;
+
+                } else if (itt.stock >= 1 && cart[tag].quantity > 1) {
                     itt.stock++;
-                    itt.quantity--;
+
                     total -= itt.price;
 
-                } else if (itt.quantity === 1) {
+                    cart[tag].quantity--;
+
+                } else if (cart[tag].quantity === 1) {
+
+                    while(itt.quantity != 1){
+                        itt.quantity--
+                    }
 
                     itt.stock++;
                     total -= itt.price;
@@ -169,7 +180,7 @@ function shoeFactory() {
                 
             }
         } 
-           
+        
     }
 
     //Checking out from cart 
@@ -186,6 +197,7 @@ function shoeFactory() {
                 outOfStock.push(itt);
 
                 let index = shoeList.indexOf(itt);
+
                 if (index > -1) {
                     shoeList.splice(index, 1);
                 }
@@ -218,7 +230,7 @@ function shoeFactory() {
             var itt = newShoesList[i];
             shoeList.push(itt);
                 
-        }   
+        }
     }
 
     function localStorageSetting(theShoeList, theCartList, theTotal, outStock) {
@@ -253,9 +265,10 @@ function shoeFactory() {
         return trimTag;
     }
 
-    //reseting shoe list from user support local storage sect
+    // reseting shoe list from user support local storage sect
     function resetShoeList(localList) {
         shoeList = localList;
+        // shoeList.push(localList);
     }
 
     function values() {
@@ -290,3 +303,5 @@ function shoeFactory() {
              resetShoeList,
     }
 }
+
+

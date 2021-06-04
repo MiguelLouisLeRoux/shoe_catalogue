@@ -11,7 +11,9 @@ var filterButton = document.querySelector(".filtButton");
 var grandTot = document.querySelector(".theTot");
 var checkOut = document.querySelector(".check-out");
 
-
+//Template reference for displaying sneakers in cart
+var cartTemplateSource = document.querySelector(".cartTemplate").innerHTML;
+var cartTemplate = Handlebars.compile(cartTemplateSource);
 
 //Factory function reference
 var theShoeFactory = shoeFactory();
@@ -30,7 +32,7 @@ var userData = {
 
 userDataHTML = userTemplate(userData);
 shoeSect.innerHTML = userDataHTML;
-    
+
 
 //Filter
 filterButton.addEventListener("click", function(){
@@ -55,10 +57,6 @@ filterButton.addEventListener("click", function(){
 
 });  
 
-//Template for displaying sneakers in cart
-var cartTemplateSource = document.querySelector(".cartTemplate").innerHTML;
-var cartTemplate = Handlebars.compile(cartTemplateSource);
-
 
 function addBtn(itt) {
 
@@ -71,7 +69,7 @@ function addBtn(itt) {
     var filteredData = {
         shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
     };
-    localStorage.clear();
+    
     filteredDataHTML = userTemplate(filteredData);
     shoeSect.innerHTML = filteredDataHTML;
     
@@ -93,6 +91,7 @@ function addBtn(itt) {
     localStorage["outOfStock"] = JSON.stringify(theShoeFactory.values().stockList);
 }
 
+//Removing from cart
 function removeBtn(tag) {
     theShoeFactory.remove(tag);
 
@@ -122,8 +121,8 @@ function removeBtn(tag) {
     localStorage["cartList"] = JSON.stringify(theShoeFactory.values().cart);
     localStorage["total"] = theShoeFactory.values().total;
     localStorage["outOfStock"] = JSON.stringify(theShoeFactory.values().stockList);
-}
 
+}
 
 //Checkout
 checkOut.addEventListener("click", function(){
@@ -191,18 +190,38 @@ if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"
     cartDataHTML = cartTemplate(cartData);
     cart.innerHTML = cartDataHTML;
 
-    grandTot.innerHTML = theShoeFactory.values().total;
-  
+    grandTot.innerHTML = theShoeFactory.values().total; 
     
-} else if (localStorage["shoeList"]) {
+}    
+
+if (localStorage["shoeList"]) {
     var newList = JSON.parse(localStorage["shoeList"]);
     
     theShoeFactory.resetShoeList(newList);
 
+    var theBrand = brandFilter.value;
+    var theColour = colourFilter.value;
+    var theSize = sizeFilter.value;
+   
     var filteredData = {
-        shoes : theShoeFactory.values().theList
+        shoes : theShoeFactory.filtering(theBrand, theColour, theSize)
     };
 
     filteredDataHTML = userTemplate(filteredData);
     shoeSect.innerHTML = filteredDataHTML;
+
+    var cartData = {
+        
+        shoes : theShoeFactory.values().cart
+       
+    };
+
+    cartDataHTML = cartTemplate(cartData);
+    cart.innerHTML = cartDataHTML;
+
+    grandTot.innerHTML = theShoeFactory.values().total; 
+
 }
+// localStorage.clear();
+
+

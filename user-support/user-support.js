@@ -75,20 +75,23 @@ addShoe.addEventListener('click', function(){
         setTimeout(function(){
             addError_Message.innerHTML = "";
         }, 1500);
-    } else {
-        console.log(fact.values().theList);
-        fact.addingNewShoe();
-        console.log();
 
+    } else {
+        
+        fact.addingNewShoe();
+        
         localStorage["shoeList"] = JSON.stringify(fact.values().theList);
+        
+        location.reload();
     }
     
 });
 
-
+// console.log(localStorage["shoeList"]);
 
 var templateSource = document.querySelector(".userTemplate").innerHTML;
 var userTemplate = Handlebars.compile(templateSource);
+
 
 
 
@@ -103,6 +106,15 @@ if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"
     outStock.innerHTML = userDataHTML;
     
 }
+
+if (localStorage["shoeList"]) {
+    var newList = JSON.parse(localStorage["shoeList"]);
+    
+    fact.resetShoeList(newList);
+}
+
+
+
 
 // Regex for price input
 price.addEventListener('change', function (){
@@ -146,3 +158,4 @@ if (outStock.childElementCount === 0) {
     outOfStock_Message.classList.add("display");
 }
 
+// localStorage.clear();
