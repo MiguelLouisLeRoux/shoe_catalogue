@@ -40,7 +40,6 @@ li {
     list-style: none;
 }
 .shoe {
-    /* width: fit-content; */
     width: 15em;
     display: inline-block;
     border-radius: 1rem;
@@ -84,6 +83,14 @@ h5 {
     padding-bottom: 1em;
     border-bottom: solid 0.1rem rgb(245, 171, 195);
 }
+
+input, select {
+    padding: 0.2em;
+    border: solid 0.1em cadetblue;
+    border-radius: 0.4em;
+    outline-color: cadetblue;
+}
+
 
 .stock-list {
     min-height: 15em;
@@ -141,6 +148,24 @@ select {
     padding-right: 0.2em;
 }
 
+.stock-remove {
+    display: inline-block;
+    padding: 0.5em;
+    margin: 0 auto;
+    border: tomato;
+    border-radius: 0.3em;
+    background-color: tomato;
+    font-weight: bold;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.stock-remove:hover {
+    color: whitesmoke;
+    background-color: seagreen;
+    border: none;
+    transition: 300ms;
+}
 
 .preview {
     display: inline-block;
@@ -168,14 +193,14 @@ select {
 
 .preview:hover {
     color: whitesmoke;
-    background-color: seagreen;
+    background-color: teal;
     border: none;
     transition: 300ms;
 }
 
 .remove:hover {
     color: whitesmoke;
-    background-color: seagreen;
+    background-color: teal;
     border: none;
     transition: 300ms;
 }
@@ -213,7 +238,7 @@ select {
 }
 
 .add:hover, .catalogue:hover  {
-    background-color: seagreen;
+    background-color: dodgerblue;
     color: whitesmoke;
     transition: 300ms;
 }
@@ -296,7 +321,6 @@ a {
 
 @media only screen and (min-width: 33.75em) {  /* 540px */
     fieldset {
-        /* width: fit-content; */
         width: 100%;
     }
 

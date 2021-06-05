@@ -58,6 +58,7 @@ preview.addEventListener('click', function(){
         userDataHTML = userTemplate(userData);
         newShoe_sect.innerHTML = userDataHTML;
     } 
+    
 });
 
 //Clear preview of sneaker
@@ -65,6 +66,21 @@ clear.addEventListener('click', function(){
     location.reload();
 })
 
+//Remove out of stock item 
+function removeOutOfStock(value) {
+    
+    fact.removeOutOfStock(value);
+
+    var userData = { 
+        
+        shoes : fact.values().stockList
+    };
+
+    userDataHTML = userTemplate(userData);
+    outStock.innerHTML = userDataHTML;
+
+    localStorage["outOfStock"] = JSON.stringify(fact.values().stockList);
+}
 
 //Addingnew sneaker to catalogue
 addShoe.addEventListener('click', function(){
@@ -82,24 +98,22 @@ addShoe.addEventListener('click', function(){
         
         localStorage["shoeList"] = JSON.stringify(fact.values().theList);
         
+        
         location.reload();
     }
     
 });
 
-// console.log(localStorage["shoeList"]);
-
 var templateSource = document.querySelector(".userTemplate").innerHTML;
 var userTemplate = Handlebars.compile(templateSource);
 
-
-
-
 //Out of stock list
 if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"] && localStorage["outOfStock"]) {
-    
+    fact.resetOutStock(JSON.parse(localStorage["outOfStock"]));
+
     var userData = { 
-        shoes : JSON.parse(localStorage["outOfStock"])
+        
+        shoes : fact.values().stockList
     };
 
     userDataHTML = userTemplate(userData);
@@ -113,9 +127,6 @@ if (localStorage["shoeList"]) {
     fact.resetShoeList(newList);
 }
 
-
-
-
 // Regex for price input
 price.addEventListener('change', function (){
     price.value = fact.regExCost(price.value);
@@ -128,7 +139,6 @@ price.addEventListener('change', function (){
         }, 1500);
     }
 })
-
 
 //Preventing stock from decreasing below 1
 stock.addEventListener('change', function(){
@@ -157,5 +167,3 @@ if (outStock.childElementCount === 0) {
 } else if (outStock.childElementCount > 0) {
     outOfStock_Message.classList.add("display");
 }
-
-// localStorage.clear();

@@ -33,10 +33,9 @@ var userData = {
 userDataHTML = userTemplate(userData);
 shoeSect.innerHTML = userDataHTML;
 
-
 //Filter
 filterButton.addEventListener("click", function(){
-   //Filtering Values
+   
     var theBrand = brandFilter.value;
     var theColour = colourFilter.value;
     var theSize = sizeFilter.value;
@@ -57,7 +56,7 @@ filterButton.addEventListener("click", function(){
 
 });  
 
-
+//Adding to cart
 function addBtn(itt) {
 
     theShoeFactory.addCart(itt);
@@ -208,20 +207,9 @@ if (localStorage["shoeList"]) {
     };
 
     filteredDataHTML = userTemplate(filteredData);
-    shoeSect.innerHTML = filteredDataHTML;
-
-    var cartData = {
-        
-        shoes : theShoeFactory.values().cart
-       
-    };
-
-    cartDataHTML = cartTemplate(cartData);
-    cart.innerHTML = cartDataHTML;
-
-    grandTot.innerHTML = theShoeFactory.values().total; 
+    shoeSect.innerHTML = filteredDataHTML; 
 
 }
-// localStorage.clear();
+
 
 

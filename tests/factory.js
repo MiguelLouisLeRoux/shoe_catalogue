@@ -135,7 +135,14 @@ function shoeFactory() {
 
                 } else if (itt.stock === 1) {
                     
-                    cart[tag].quantity++;
+                    if (!cart.hasOwnProperty(tag)) {
+                        cart[tag] = itt;
+
+                    } else if(cart.hasOwnProperty(tag)) {
+                    
+                        cart[tag].quantity++;
+                    }
+
                     total += itt.price;
                     itt.stock = noStock;
     
@@ -150,12 +157,11 @@ function shoeFactory() {
             var itt = shoeList[i];
 
             if (itt.tag === tag) {
-
-                if (itt.stock === noStock) {
+                
+                if (itt.stock === noStock && cart[tag].quantity > 1) {
                     itt.stock = 1;
                     
                     total -= itt.price;
-
                     cart[tag].quantity--;
 
                 } else if (itt.stock >= 1 && cart[tag].quantity > 1) {
@@ -165,17 +171,21 @@ function shoeFactory() {
 
                     cart[tag].quantity--;
 
-                } else if (cart[tag].quantity === 1) {
+                    
 
-                    while(itt.quantity != 1){
-                        itt.quantity--
-                    }
+                } else if (cart[tag].quantity === 1 && itt.stock === noStock) {
+
+                    itt.stock = 1;
+                    total -= itt.price;
+                
+                    delete cart[tag];
+
+                } else if (cart[tag].quantity === 1 && itt.stock != noStock) {
 
                     itt.stock++;
                     total -= itt.price;
-
+        
                     delete cart[tag];
-
                 }
                 
             }
@@ -191,18 +201,34 @@ function shoeFactory() {
         for (var i = 0; i < shoeList.length; i++) {
 
             var itt = shoeList[i];
+            itt.quantity = 1;
 
             if (itt.stock === noStock) {
+                
+                var filt = shoeList.filter(function(itt){
+                    return itt.stock === noStock;
+                })
 
-                outOfStock.push(itt);
-
-                let index = shoeList.indexOf(itt);
-
-                if (index > -1) {
-                    shoeList.splice(index, 1);
-                }
+                // outOfStock = filt;
+               
             }
+        }
 
+        for (var k = 0; k < filt.length; k++) {
+            outOfStock.push(filt[k]);
+        }
+
+        for (var j = 0; j < shoeList.length; j++) {
+            var itt2 = shoeList[j];
+            itt2.quantity = 1;
+            if (itt2.stock != noStock) {
+                
+                var filt2 = shoeList.filter(function(itt2){
+                    return itt2.stock != noStock;
+                })
+
+                shoeList = filt2;
+            }
         }
     }
 
@@ -211,9 +237,10 @@ function shoeFactory() {
         this.brand = brand;
         this.colour = colour;
         this.size = size;
-        this.stock = stock
+        this.stock = parseInt(stock);
         this.tag = tag;
-        this.price = price;
+        this.price = parseFloat(price);
+        this.quantity = 1;
     }
     
     function newShoe(link, brand, colour, size, stock, tag, price) {
@@ -265,10 +292,30 @@ function shoeFactory() {
         return trimTag;
     }
 
+    //reseting out of stock list for user support sect 
+    function resetOutStock(list) {
+        outOfStock = list;
+    }
+
+    //Removing shoe from out of stock list 
+    function removeOutOfStock(tag) {
+        for (var i = 0; i < outOfStock.length; i++) {
+            var itt = outOfStock[i];
+
+            if (itt.tag === tag) {
+
+                let index = outOfStock.indexOf(itt);
+
+                if (index > -1) {
+                    outOfStock.splice(index, 1);
+                }
+            }
+        }
+    }
+
     // reseting shoe list from user support local storage sect
     function resetShoeList(localList) {
         shoeList = localList;
-        // shoeList.push(localList);
     }
 
     function values() {
@@ -277,7 +324,7 @@ function shoeFactory() {
             theError : error,
             outOfStock : noStock,
             cart : cart,
-            total : total.toFixed(2),
+            total : parseFloat(total.toFixed(2)),
             stockList : outOfStock,
             newShoesList : newShoesList,
             errorSize : theSize,
@@ -301,6 +348,8 @@ function shoeFactory() {
              regExCost,
              checkTag,
              resetShoeList,
+             resetOutStock,
+             removeOutOfStock,
     }
 }
 

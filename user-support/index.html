@@ -18,6 +18,10 @@
                 <li><strong>Stock:</strong> <span class="outStock">{{stock}}<span></li>
                 <li><strong>Price:</strong>  R{{price}}</li>
                 <li><strong>Item Tag:</strong> {{tag}}</li>
+                <br>
+                <br>
+                <button class="stock-remove" value={{tag}} onclick="removeOutOfStock(value)">Remove</button>
+                <br>
             </div>
         {{/each}}
     </script>

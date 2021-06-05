@@ -178,6 +178,12 @@ p {
   display: none;
 }
 
+select {
+  border: solid 0.1em cadetblue;
+  border-radius: 0.4em;
+  outline-color: cadetblue;
+}
+
 .nav {
   background-color:#333447;
   background-repeat: no-repeat;
