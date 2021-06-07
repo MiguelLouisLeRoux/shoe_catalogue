@@ -27,11 +27,12 @@ function shoeFactory() {
     var total = 0.00;
 
     //User messages
-    var error = "Sorry, No match found.";
+    var error = "Sorry, no match found.";
     var noStock = "Out of stock";
 
     //User Support Out of Stock list 
     var outOfStock = [];
+    var outOfStockList = [];
 
     //User Support
     var newShoesList = [];
@@ -44,7 +45,7 @@ function shoeFactory() {
     var theBrand = "Select a brand.";
     var theColour = "Select a colour";
     var theSize = "Select a size";
-    var addShoe = "Preview item before adding to catalogue."
+    var addShoe = "Preview item before adding to catalogue.";
     
 
     //Filtering
@@ -58,52 +59,53 @@ function shoeFactory() {
                 var filt = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.colour === colour && itt.size === size;
                 })
-
+               
                 return filt;
 
             } else if (itt.colour === colour && itt.size === size && brands === "All") {
                 var filt2 = shoeList.filter(function(itt){
                     return itt.colour === colour && itt.size === size;
                 })
-
+               
                 return filt2;
 
             } else if (itt.brand === brands && itt.size === size && colour === "All") {
                 var filt3 = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.size === size;
                 })
-
+               
                 return filt3;
 
             } else if (itt.brand === brands && itt.colour === colour && size === "All") {
                 var filt4 = shoeList.filter(function(itt){
                     return itt.brand === brands && itt.colour === colour;
                 })
-
+               
                 return filt4;
 
             } else if (itt.brand === brands && colour === "All" && size === "All") {
                 var filt5 = shoeList.filter(function(itt){
                     return itt.brand === brands;
                 })
-
+               
                 return filt5;
 
             } else if (itt.colour === colour && brands === "All" && size === "All") {
                 var filt6 = shoeList.filter(function(itt){
                     return itt.colour === colour;
                 })
-
+              
                 return filt6;
 
             } else if (itt.size === size && brands === "All" && colour === "All") {
                 var filt7 = shoeList.filter(function(itt){
                     return itt.size === size;
                 })
-
+              
                 return filt7;
 
             } else if (brands === "All" && colour === "All" && size === "All") {    
+                
                 return shoeList;
             }
         }
@@ -208,15 +210,17 @@ function shoeFactory() {
                 var filt = shoeList.filter(function(itt){
                     return itt.stock === noStock;
                 })
-
-                // outOfStock = filt;
-               
+                outOfStockList = filt
             }
         }
 
-        for (var k = 0; k < filt.length; k++) {
-            outOfStock.push(filt[k]);
+        if (outOfStockList.length > 0) {
+            
+            for (var k = 0; k < outOfStockList.length; k++) {
+                outOfStock.push(outOfStockList[k]);
+            }  
         }
+        
 
         for (var j = 0; j < shoeList.length; j++) {
             var itt2 = shoeList[j];

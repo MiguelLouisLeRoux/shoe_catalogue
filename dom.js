@@ -53,7 +53,6 @@ filterButton.addEventListener("click", function(){
     if (shoeSect.childElementCount === 0) {
         shoeSect.innerHTML = theShoeFactory.values().theError; 
     }
-
 });  
 
 //Adding to cart
