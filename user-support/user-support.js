@@ -14,6 +14,7 @@ const outOfStock_Message = document.querySelector(".no-stock");
 const addError_Message = document.querySelector(".addError");
 const newShoe_sect = document.querySelector(".new-shoe-sect");
 
+
 var previewTemplateSource = document.querySelector(".previewTemplate").innerHTML;
 
 var fact = shoeFactory();
@@ -68,8 +69,9 @@ clear.addEventListener('click', function(){
 
 //Remove out of stock item 
 function removeOutOfStock(value) {
+    const add_New_Stock = document.querySelector(".stock-upp");
     
-    fact.removeOutOfStock(value);
+    fact.removeOutOfStock(value, add_New_Stock.value);
 
     var userData = { 
         
@@ -80,6 +82,7 @@ function removeOutOfStock(value) {
     outStock.innerHTML = userDataHTML;
 
     localStorage["outOfStock"] = JSON.stringify(fact.values().stockList);
+    localStorage["shoeList"] = JSON.stringify(fact.values().theList);
 }
 
 //Addingnew sneaker to catalogue
@@ -118,7 +121,17 @@ if (localStorage["shoeList"] && localStorage["cartList"] && localStorage["total"
 
     userDataHTML = userTemplate(userData);
     outStock.innerHTML = userDataHTML;
+
+    //Preventing stock from decreasing below 1
+    const add_New_Stock = document.querySelector(".stock-upp");
+    if (outStock.contains(add_New_Stock)) {
+        add_New_Stock.addEventListener('change', function(){
     
+            if (add_New_Stock.value === "" || add_New_Stock.value < 1) {
+                add_New_Stock.value = 1;
+            }
+        })
+    }   
 }
 
 if (localStorage["shoeList"]) {
@@ -167,3 +180,5 @@ if (outStock.childElementCount === 0) {
 } else if (outStock.childElementCount > 0) {
     outOfStock_Message.classList.add("display");
 }
+
+

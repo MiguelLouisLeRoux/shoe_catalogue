@@ -302,11 +302,13 @@ function shoeFactory() {
     }
 
     //Removing shoe from out of stock list 
-    function removeOutOfStock(tag) {
+    function removeOutOfStock(tag, newStock) {
         for (var i = 0; i < outOfStock.length; i++) {
             var itt = outOfStock[i];
 
             if (itt.tag === tag) {
+                itt.stock = parseInt(newStock);
+                shoeList.push(itt);
 
                 let index = outOfStock.indexOf(itt);
 

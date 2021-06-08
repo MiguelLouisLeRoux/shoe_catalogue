@@ -19,8 +19,13 @@
                 <li><strong>Price:</strong>  R{{price}}</li>
                 <li><strong>Item Tag:</strong> {{tag}}</li>
                 <br>
-                <br>
-                <button class="stock-remove" value={{tag}} onclick="removeOutOfStock(value)">Remove</button>
+                <div class="the-stock-up">
+                    <label for="stock">Stock Up:</label>
+                        <input type="number" class="stock-upp" placeholder="1" value="1">
+                    <br>
+                    <button class="stock-remove" value={{tag}} onclick="removeOutOfStock(value)">Add to Catalogue</button>
+                    <br>
+                </div>
                 <br>
             </div>
         {{/each}}

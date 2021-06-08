@@ -46,7 +46,9 @@ li {
     margin: 2% auto;
     font-size: 0.8rem;
     text-align: center;
-    
+    background-color: rgb(226, 168, 147);
+    padding-bottom: 0.5em;
+    padding-top: 1em;
 }
 
 .center {
@@ -150,11 +152,11 @@ select {
 
 .stock-remove {
     display: inline-block;
-    padding: 0.5em;
+    padding: 0.5em 0.9em;
     margin: 0 auto;
-    border: tomato;
+    border:#333447;
     border-radius: 0.3em;
-    background-color: tomato;
+    background-color: rgb(93, 139, 184);
     font-weight: bold;
     color: whitesmoke;
     cursor: pointer;
@@ -165,6 +167,22 @@ select {
     background-color: seagreen;
     border: none;
     transition: 300ms;
+}
+
+.stock-upp {
+    display: block;
+    margin: 0 auto;
+    width: 5em;
+}
+
+.the-stock-up {
+    padding: 0.5em 1em;
+    padding-bottom: 0.5em;
+    border-radius: 0.4em;
+    background-color: rgb(230, 157, 157);
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .preview {
